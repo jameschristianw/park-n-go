@@ -3,8 +3,18 @@
     <h1 class="title">Park N Go</h1>
   </div>
   <div class="ion-padding">
-    <ion-button expand="block" color="primary" class="button">Login</ion-button>
-    <ion-button expand="block" color="secondary" class="button"
+    <ion-button
+      expand="block"
+      color="primary"
+      class="button"
+      [routerLink]="['/', 'login']"
+      >Login</ion-button
+    >
+    <ion-button
+      expand="block"
+      color="secondary"
+      class="button"
+      [routerLink]="['/', 'register']"
       >Register</ion-button
     >
   </div>
