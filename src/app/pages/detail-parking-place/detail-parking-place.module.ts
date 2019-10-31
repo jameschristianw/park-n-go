@@ -6,9 +6,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { DetailParkingPlacePage } from './detail-parking-place.page';
-import { BookParkingConfirmationComponent } from 'src/app/components/book-parking-confirmation/book-parking-confirmation.component';
 
 import { StarRatingModule } from 'ionic4-star-rating'
+import { BookingConfirmationComponent } from 'src/app/components/booking-confirmation/booking-confirmation.component';
 
 const routes: Routes = [
   {
@@ -25,7 +25,7 @@ const routes: Routes = [
     StarRatingModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [DetailParkingPlacePage, BookParkingConfirmationComponent],
-  entryComponents: [BookParkingConfirmationComponent]
+  declarations: [DetailParkingPlacePage, BookingConfirmationComponent],
+  entryComponents: [BookingConfirmationComponent]
 })
 export class DetailParkingPlacePageModule {}

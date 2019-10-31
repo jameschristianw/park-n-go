@@ -1,0 +1,17 @@
+.list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+ion-segment-button {
+  --color-activated: coral;
+  --border-radius: 10px;
+  --border-color: coral;
+  --background-activated: rgb(255, 121, 72);
+  --background-checked: coral;
+  --color: coral;
+  --margin-start: 10px;
+  --margin-end: 10px;
+}

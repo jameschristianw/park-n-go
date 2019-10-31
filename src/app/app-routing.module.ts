@@ -30,12 +30,9 @@ const routes: Routes = [
     path: 'history',
     loadChildren: './pages/history/history.module#HistoryPageModule',
   },
-<<<<<<< HEAD
   { path: 'account/manage-vehicle', loadChildren: './pages/manage-vehicle/manage-vehicle.module#ManageVehiclePageModule' },
   { path: 'detail-parking-place', loadChildren: './pages/detail-parking-place/detail-parking-place.module#DetailParkingPlacePageModule' },
 
-=======
->>>>>>> 73646e01bd8c5eb3a94cddfcc8b60a00870fa2fd
 ];
 
 @NgModule({

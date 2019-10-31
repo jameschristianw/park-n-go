@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { BookingConfirmationComponent } from 'src/app/components/booking-confirmation/booking-confirmation.component';
 
 @Component({
   selector: 'app-detail-parking-place',
@@ -21,11 +22,11 @@ export class DetailParkingPlacePage implements OnInit {
   }
 
   async showModal(){
-    // const modal = await this.modalCtrl.create({
-    //   componentProps:
-    // })
+    const modal = await this.modalCtrl.create({
+      component: BookingConfirmationComponent,
+    })
 
-    // await modal.present()
+    await modal.present()
   }
 
 }
