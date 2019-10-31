@@ -10,20 +10,16 @@ const routes: Routes = [
   },
   {
     path: 'register',
-    loadChildren: './pages/auth/register/register.module#RegisterPageModule',
+    loadChildren: './pages/auth/egister/register.module#RegisterPageModule',
   },
-  {
-    path: 'login',
-    loadChildren: './pages/auth/login/login.module#LoginPageModule',
-  },
-  {
-    path: 'auth',
-    loadChildren: './pages/auth/main/main.module#MainPageModule',
-  },
+  { path: 'login', loadChildren: './pages/auth/login/login.module#LoginPageModule' },
+  { path: 'main', loadChildren: './pages/auth/main/main.module#MainPageModule' },
   {
     path: 'profile',
-    loadChildren: './pages/profile/profile.module#ProfilePageModule',
+    loadChildren: './pages/profile/profile.module#ProfilePageModule', 
   },
+  { path: 'manage-vehicle', loadChildren: './pages/manage-vehicle/manage-vehicle.module#ManageVehiclePageModule' },
+
 ];
 
 @NgModule({
