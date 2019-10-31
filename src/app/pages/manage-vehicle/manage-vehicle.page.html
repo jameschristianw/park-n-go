@@ -1,10 +1,19 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons>
-      <ion-back-button slot="start" defaultHref="/home"></ion-back-button>
+      <ion-back-button
+        slot="start"
+        defaultHref="/tabs/profile"
+      ></ion-back-button>
     </ion-buttons>
     <ion-title>Manage Vehicles</ion-title>
-    <ion-label slot="primary" class="ion-padding" (click)="addVehicle()" color="primary">Add</ion-label>
+    <ion-label
+      slot="primary"
+      class="ion-padding"
+      (click)="addVehicle()"
+      color="primary"
+      >Add</ion-label
+    >
   </ion-toolbar>
 </ion-header>
 
@@ -20,7 +29,11 @@
           </ion-col>
           <!-- CAR PICTURE -->
           <ion-col size="4" class="">
-            <ion-img [src]="'https://cdn1-production-images-kly.akamaized.net/FmOMEUOE0I78Bc0ntEqqjbTha4Q=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/2432089/original/085299300_1542946342-kdakjasd.jpg'"></ion-img>
+            <ion-img
+              [src]="
+                'https://cdn1-production-images-kly.akamaized.net/FmOMEUOE0I78Bc0ntEqqjbTha4Q=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/2432089/original/085299300_1542946342-kdakjasd.jpg'
+              "
+            ></ion-img>
           </ion-col>
         </ion-row>
       </ion-item>
@@ -33,7 +46,11 @@
           </ion-col>
           <!-- CAR PICTURE -->
           <ion-col size="4" class="">
-            <ion-img [src]="'https://cdn1-production-images-kly.akamaized.net/FmOMEUOE0I78Bc0ntEqqjbTha4Q=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/2432089/original/085299300_1542946342-kdakjasd.jpg'"></ion-img>
+            <ion-img
+              [src]="
+                'https://cdn1-production-images-kly.akamaized.net/FmOMEUOE0I78Bc0ntEqqjbTha4Q=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/2432089/original/085299300_1542946342-kdakjasd.jpg'
+              "
+            ></ion-img>
           </ion-col>
         </ion-row>
       </ion-item>
