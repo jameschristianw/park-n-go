@@ -19,6 +19,7 @@ const routes: Routes = [
     loadChildren: './pages/profile/profile.module#ProfilePageModule', 
   },
   { path: 'account/manage-vehicle', loadChildren: './pages/manage-vehicle/manage-vehicle.module#ManageVehiclePageModule' },
+  { path: 'detail-parking-place', loadChildren: './pages/detail-parking-place/detail-parking-place.module#DetailParkingPlacePageModule' },
 
 ];
 

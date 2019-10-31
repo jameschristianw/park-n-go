@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detail Parking Place</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-label style="font-size: 24px;">Newton Barat</ion-label>
+      </ion-col>
+    </ion-row>
+    
+    <ion-row>
+      <ion-col>
+        <ion-label>Ruko Newton Barat 19 - 1,9 KM</ion-label>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+          <ionic4-star-rating #rating
+            activeIcon = "ios-star"
+            defaultIcon = "ios-star-outline"
+            activeColor = "#488aff" 
+            defaultColor = "#f0f0f0"
+            readonly="false"
+            rating="3"
+            fontSize = "24px"
+            (ratingChanged)="logRatingChange($event)">
+            
+        </ionic4-star-rating>
+        
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-img [src]="'https://s1.rea.global/img/668x501-resize/rumah/id/6d6839d2fed0471eaf5daa445e0b2c53.jpg'"></ion-img>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-label>Space Description</ion-label>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-label>Tempat parkir yang berada di depan Ruko Newton Barat No 19. Tempat aman dijaga satpam berkualitas tinggi.</ion-label>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        
+      </ion-col>
+    </ion-row>
+    <!-- <ion-button (click)="onBookBtnClick()" class="bottom-btn">Book Now</ion-button> -->
+  </ion-grid>
+  
+  <!-- <div class="bottom-btn"> -->
+    <ion-button expand="block" (click)="onBookBtnClick()" class="bottom-btn">Book Now</ion-button>
+  <!-- </div> -->
+</ion-content>
