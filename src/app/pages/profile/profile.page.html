@@ -25,7 +25,7 @@
       </ion-card>
       <ion-card class="ion-padding card">
         <ion-list>
-          <ion-item>
+          <ion-item routerLink="/account/manage-vehicle">
             <ion-label>
               <h2>Manage Vehicle</h2>
             </ion-label>
@@ -43,7 +43,7 @@
     expand="block"
     class="log-out"
     color="danger"
-    [routerLink]="['/', 'main']"
+    [routerLink]="['/', 'auth']"
     >Log Out</ion-button
   >
 </ion-content>
