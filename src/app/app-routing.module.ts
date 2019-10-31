@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'main', pathMatch: 'full' },
   {
     path: 'home',
     loadChildren: () =>
@@ -10,10 +10,11 @@ const routes: Routes = [
   },
   {
     path: 'register',
-    loadChildren: './pages/register/register.module#RegisterPageModule',
+    loadChildren: './pages/auth/egister/register.module#RegisterPageModule',
   },
-  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
-  { path: 'main', loadChildren: './pages/auth/main/main.module#MainPageModule' },
+  { path: 'login', loadChildren: './pages/auth/login/login.module#LoginPageModule' },
+  { path: 'main', loadChildren: './pages/auth/main/main.module#MainPageModule' },  { path: 'manage-vehicle', loadChildren: './pages/manage-vehicle/manage-vehicle.module#ManageVehiclePageModule' },
+
 ];
 
 @NgModule({
