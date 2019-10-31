@@ -17,4 +17,15 @@ export class AddVehicleComponent implements OnInit {
   closeModal(){
     this.modalCtrl.dismiss()
   }
+
+  addVehicleToDB(){
+    // this.closeModal()
+    console.log("Vehicle Added")
+    console.log("Closing Modal")
+    this.closeModal()
+  }
+
+  addVehiclePicture(){
+    console.log("Picture Added");
+  }
 }
