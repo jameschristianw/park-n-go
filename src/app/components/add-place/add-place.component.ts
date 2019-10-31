@@ -17,4 +17,15 @@ export class AddPlaceComponent implements OnInit {
   closeModal() {
     this.modalCtrl.dismiss();
   }
+
+  addPlaceToDB(){
+    console.log("Vehicle Added")
+    console.log("Closing Modal")
+    this.closeModal()
+  }
+
+  addPlacePicture(){
+    console.log("Picture Added");
+  }
+
 }
