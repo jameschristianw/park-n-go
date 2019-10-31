@@ -2,7 +2,11 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
+<<<<<<< HEAD
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
+=======
+  { path: '', redirectTo: 'main', pathMatch: 'full' },
+>>>>>>> Manage Vehicle WIP
   {
     path: 'home',
     loadChildren: () =>
@@ -18,7 +22,7 @@ const routes: Routes = [
     path: 'profile',
     loadChildren: './pages/profile/profile.module#ProfilePageModule', 
   },
-  { path: 'manage-vehicle', loadChildren: './pages/manage-vehicle/manage-vehicle.module#ManageVehiclePageModule' },
+  { path: 'account/manage-vehicle', loadChildren: './pages/manage-vehicle/manage-vehicle.module#ManageVehiclePageModule' },
 
 ];
 
