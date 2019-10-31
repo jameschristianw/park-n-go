@@ -1,10 +1,19 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons>
-      <ion-back-button slot="start" defaultHref="/home"></ion-back-button>
+      <ion-back-button
+        slot="start"
+        defaultHref="/tabs/profile"
+      ></ion-back-button>
     </ion-buttons>
     <ion-title>Manage Place</ion-title>
-    <ion-label slot="primary" class="ion-padding" (click)="addPlace()" color="primary">Add</ion-label>
+    <ion-label
+      slot="primary"
+      class="ion-padding"
+      (click)="addPlace()"
+      color="primary"
+      >Add</ion-label
+    >
   </ion-toolbar>
 </ion-header>
 
@@ -20,7 +29,9 @@
           </ion-col>
           <!-- PLACE PICTURE -->
           <ion-col size="4" class="">
-            <ion-img [src]="'http://www.desertsun.co.uk/blog/images/Apartment%201.jpg'"></ion-img>
+            <ion-img
+              [src]="'http://www.desertsun.co.uk/blog/images/Apartment%201.jpg'"
+            ></ion-img>
           </ion-col>
         </ion-row>
       </ion-item>
@@ -33,7 +44,11 @@
           </ion-col>
           <!-- PLACE PICTURE -->
           <ion-col size="4" class="">
-            <ion-img [src]="'https://static3.businessinsider.com/image/5681799ce6183e55008b526d-480/carmel-place-nyc-micro-apartment.jpg'"></ion-img>
+            <ion-img
+              [src]="
+                'https://static3.businessinsider.com/image/5681799ce6183e55008b526d-480/carmel-place-nyc-micro-apartment.jpg'
+              "
+            ></ion-img>
           </ion-col>
         </ion-row>
       </ion-item>
