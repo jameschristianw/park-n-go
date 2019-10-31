@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Place</ion-title>
+    <ion-buttons slot="end">
+      <ion-button slot="icon-only" (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form #addVehicle>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-label>Place Name</ion-label>
+          <ion-item lines="full">
+            <ion-input
+              type="text"
+              placeholder="Place Name"
+              name="placeName"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-label>Address</ion-label>
+          <ion-item lines="full">
+            <ion-input
+              type="text"
+              placeholder="Jl. Scientia Square Park"
+              name="placeAdress"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-label>Capacity</ion-label>
+          <ion-item lines="full">
+            <ion-input
+              type="text"
+              placeholder="1 Cars 2 Motorbikes"
+              name="palceCapacity"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-label>Picture</ion-label>
+          <!-- <ion-item lines="full"> -->
+          <ion-button
+            expand="block"
+            class="ion-margin-top"
+            (click)="addPlacePicture()"
+            >Upload Picture</ion-button
+          >
+          <!-- </ion-item> -->
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" (click)="addPlaceToDB()"
+            >Add Place</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
