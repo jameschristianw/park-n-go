@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding fullscreen>
+  <div>
+    <h1>Register</h1>
+    <h6 class="caption">Please fill in a few details below.</h6>
+  </div>
+
+  <!-- <form onsubmit="processForm(event)"> -->
+  <ion-list lines="full" class="ion-no-margin ion-no-padding">
+    <ion-item class="input-container">
+      <ion-label position="stacked"
+        >First Name <ion-text color="danger">*</ion-text></ion-label
+      >
+      <ion-input
+        required
+        type="text"
+        oninput="handleFirstNameValue(event)"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked"
+        >Last Name <ion-text color="danger">*</ion-text></ion-label
+      >
+      <ion-input
+        required
+        type="text"
+        oninput="handleLastNameValue(event)"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked"
+        >Email <ion-text color="danger">*</ion-text></ion-label
+      >
+      <ion-input
+        required
+        inputmode="email"
+        oninput="handleLastNameValue(event)"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked"
+        >Phone Number <ion-text color="danger">*</ion-text></ion-label
+      >
+      <ion-input
+        required
+        type="number"
+        oninput="handleLastNameValue(event)"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked"
+        >Password <ion-text color="danger">*</ion-text></ion-label
+      >
+      <ion-input
+        required
+        type="password"
+        oninput="handleLastNameValue(event)"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked"
+        >Confirm Password <ion-text color="danger">*</ion-text></ion-label
+      >
+      <ion-input
+        required
+        type="password"
+        oninput="handleLastNameValue(event)"
+      ></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <div class="ion-padding">
+    <div class="conditions-container">
+      <ion-checkbox [(ngModel)]="checkedBtn" slot="start"></ion-checkbox>
+      <ion-label class="conditions-caption"
+        >I agree with the <a href="#">Terms and Conditions</a></ion-label
+      >
+    </div>
+    <ion-button
+      expand="block"
+      type="submit"
+      [disabled]="!checkedBtn"
+      class="ion-no-margin"
+      [routerLink]="['/', 'tabs', 'parking']"
+      >Create account</ion-button
+    >
+  </div>
+  <!-- </form> -->
+</ion-content>
