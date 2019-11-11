@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-add-vehicle',
@@ -8,21 +9,39 @@ import { ModalController } from '@ionic/angular';
 })
 export class AddVehicleComponent implements OnInit {
 
+  @ViewChild('addVehicle', {static: false}) addForm!: NgForm
+  vehicleType!: string;
+  vehicleModel!: string;
+  plateNumber!: string;
+
   constructor(
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,    
   ) { }
 
   ngOnInit() {}
 
   closeModal(){
+    console.log("Closing Modal")
     this.modalCtrl.dismiss()
   }
 
   addVehicleToDB(){
-    // this.closeModal()
-    console.log("Vehicle Added")
-    console.log("Closing Modal")
-    this.closeModal()
+
+    console.log(this.addForm.value['plateNumber'], this.addForm.value['vehicleType'], this.addForm.value['vehicleModel'])
+
+    if(!this.addForm.valid){
+      console.log("Please fill in the blanks with the right input!")
+    }
+    else{
+      // Add vehicle
+      
+
+      console.log("Vehicle Added")
+
+
+      console.log("Closing Modal")
+      // this.closeModal()
+    }
   }
 
   addVehiclePicture(){
