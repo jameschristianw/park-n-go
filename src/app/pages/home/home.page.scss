@@ -4,9 +4,10 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('https://miro.medium.com/max/4064/1*qYUvh-EtES8dtgKiBRiLsA.png');
+  // background-image: url('https://miro.medium.com/max/4064/1*qYUvh-EtES8dtgKiBRiLsA.png');
   padding-left: 15px;
   padding-right: 15px;
+  height: 90vh;
 }
 
 .input {
@@ -23,10 +24,13 @@
   margin-left: 10px;
 }
 
+.card-container{
+  display: inline;
+}
+
 .card {
   display: flex;
   flex-direction: column;
-  margin-top: 480px;
   background-color: white;
   border-radius: 10px;
   padding: 10px;
@@ -34,6 +38,7 @@
   -webkit-box-shadow: 4px 6px 21px -5px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 4px 6px 21px -5px rgba(0, 0, 0, 0.3);
   box-shadow: 4px 6px 21px -5px rgba(0, 0, 0, 0.3);
+  position: relative;
 }
 .flex {
   display: flex;
