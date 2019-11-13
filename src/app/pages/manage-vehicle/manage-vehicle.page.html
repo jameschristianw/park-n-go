@@ -18,21 +18,30 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
+
+  <ion-list *ngFor="let v of vehicleList">
     <ion-item lines="full" class="list-item">
       <div class="wrapper-vehicle">
-        <h3 class="vehicle-name">Honda Supra X</h3>
-        <ion-label class="plate">B 1234 XYZ</ion-label>
+        <h3 class="vehicle-name">{{ v.vehicleModel }}</h3>
+        <ion-label class="plate">{{ v.plateNo }}</ion-label>
       </div>
-      <ion-label class="vehicle-type">Motorcycles</ion-label>
+      <ion-label class="vehicle-type">{{ v.vehicleType }}</ion-label>
     </ion-item>
-    <ion-item lines="full" class="list-item">
-      <div class="wrapper-vehicle">
-        <h3 class="vehicle-name">Range Rover</h3>
-        <ion-label class="plate">B 1234 XYZ</ion-label>
-      </div>
-      <ion-label class="vehicle-type">Car</ion-label>
-    </ion-item>
+<!--  <ion-list>-->
+<!--    <ion-item lines="full" class="list-item">-->
+<!--      <div class="wrapper-vehicle">-->
+<!--        <h3 class="vehicle-name">Honda Supra X</h3>-->
+<!--        <ion-label class="plate">B 1234 XYZ</ion-label>-->
+<!--      </div>-->
+<!--      <ion-label class="vehicle-type">Motorcycles</ion-label>-->
+<!--    </ion-item>-->
+<!--    <ion-item lines="full" class="list-item">-->
+<!--      <div class="wrapper-vehicle">-->
+<!--        <h3 class="vehicle-name">Range Rover</h3>-->
+<!--        <ion-label class="plate">B 1234 XYZ</ion-label>-->
+<!--      </div>-->
+<!--      <ion-label class="vehicle-type">Car</ion-label>-->
+<!--    </ion-item>-->
   </ion-list>
   <ion-button
     expand="block"

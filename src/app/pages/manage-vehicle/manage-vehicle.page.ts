@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, ActionSheetController } from '@ionic/angular';
 import { AddVehicleComponent } from 'src/app/components/add-vehicle/add-vehicle.component';
+import { Router } from '@angular/router';
+import { ManageVehicleService } from '../../services/manage-vehicle.service';
+import { Vehicle } from '../../model/vehicle.model';
 
 @Component({
   selector: 'app-manage-vehicle',
@@ -9,41 +12,53 @@ import { AddVehicleComponent } from 'src/app/components/add-vehicle/add-vehicle.
 })
 export class ManageVehiclePage implements OnInit {
 
+  vehicleList: Vehicle[] = [];
+
   constructor(
     private modalCtrl: ModalController,
-    private actionCtrl: ActionSheetController
-  ) { }
-
-  ngOnInit() {
+    private actionCtrl: ActionSheetController,
+    private router: Router,
+    private manageVehicleSvc: ManageVehicleService
+  ) {
   }
 
-  addVehicle(){
-    console.log("Add button clicked!")
+  async ngOnInit() {
+    (await this.manageVehicleSvc.getVehicles()).subscribe(res => {
+      this.vehicleList = res;
+    });
+    // this.vehicleList = this.manageVehicleSvc.getVehicles();
+    console.log('Manage Vehicle Page', this.vehicleList);
+  }
 
-    this.showModal()
+  addVehicle() {
+    console.log('Add button clicked!');
+
+    this.router.navigateByUrl('add-vehicle');
+
+    // this.showModal()
     // this.showActionSheet()
   }
 
-  async showModal(){
+  async showModal() {
     const modalAdd = await this.modalCtrl.create({
-      component: AddVehicleComponent
-    })
+      component: AddVehicleComponent,
+    });
 
-    await modalAdd.present()
+    await modalAdd.present();
   }
 
-  async showActionSheet(){
+  async showActionSheet() {
     const actionAdd = await this.actionCtrl.create({
       header: 'Add Vehicle',
       buttons: [{
-        text: 'Test'
+        text: 'Test',
       }, {
         text: 'Cancel',
-        role: 'cancel'
-      }]
-    })
+        role: 'cancel',
+      }],
+    });
 
-    actionAdd.present()
+    actionAdd.present();
   }
 
 }
