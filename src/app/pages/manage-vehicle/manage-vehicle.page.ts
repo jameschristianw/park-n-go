@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, ActionSheetController } from '@ionic/angular';
-import { AddVehicleComponent } from 'src/app/components/add-vehicle/add-vehicle.component';
 import { Router } from '@angular/router';
 import { ManageVehicleService } from '../../services/manage-vehicle.service';
 import { Vehicle } from '../../model/vehicle.model';
@@ -15,8 +13,6 @@ export class ManageVehiclePage implements OnInit {
   vehicleList: Vehicle[] = [];
 
   constructor(
-    private modalCtrl: ModalController,
-    private actionCtrl: ActionSheetController,
     private router: Router,
     private manageVehicleSvc: ManageVehicleService
   ) {
@@ -25,40 +21,19 @@ export class ManageVehiclePage implements OnInit {
   async ngOnInit() {
     (await this.manageVehicleSvc.getVehicles()).subscribe(res => {
       this.vehicleList = res;
+      console.log('Manage Vehicle Page', this.vehicleList);
     });
     // this.vehicleList = this.manageVehicleSvc.getVehicles();
-    console.log('Manage Vehicle Page', this.vehicleList);
   }
 
   addVehicle() {
     console.log('Add button clicked!');
 
     this.router.navigateByUrl('add-vehicle');
-
-    // this.showModal()
-    // this.showActionSheet()
   }
 
-  async showModal() {
-    const modalAdd = await this.modalCtrl.create({
-      component: AddVehicleComponent,
-    });
-
-    await modalAdd.present();
+  editVehicle(item: Vehicle) {
+    console.log('Edit Vehicle page.ts');
+    console.log(item);
   }
-
-  async showActionSheet() {
-    const actionAdd = await this.actionCtrl.create({
-      header: 'Add Vehicle',
-      buttons: [{
-        text: 'Test',
-      }, {
-        text: 'Cancel',
-        role: 'cancel',
-      }],
-    });
-
-    actionAdd.present();
-  }
-
 }
