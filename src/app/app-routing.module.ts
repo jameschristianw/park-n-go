@@ -34,7 +34,8 @@ const routes: Routes = [
     path: 'history',
     loadChildren: './pages/history/history.module#HistoryPageModule',
   },
-  { path: 'add-place', loadChildren: './pages/manage-place/add-place/add-place.module#AddPlacePageModule' },
+  { path: 'add-place', loadChildren: './pages/manage-place/add-place/add-place.module#AddPlacePageModule' },  { path: 'add-vehicle', loadChildren: './pages/manage-vehicle/add-vehicle/add-vehicle.module#AddVehiclePageModule' },
+
 ];
 
 @NgModule({

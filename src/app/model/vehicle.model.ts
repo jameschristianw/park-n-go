@@ -1,5 +1,6 @@
 export interface Vehicle {
-  type: 'Motorcycle' | 'Car';
+  vehicleType: 'Motorcycle' | 'Car';
   vehicleModel: string;
   plateNo: string;
+  email: string;
 }

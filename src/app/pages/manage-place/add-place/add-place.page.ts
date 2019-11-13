@@ -11,16 +11,19 @@ export class AddPlacePage implements OnInit {
 
   places: Place[] | undefined;
 
-  constructor(private placeService: ManagePlaceService) { }
+  // @ts-ignore
+  constructor(private placeService: ManagePlaceService) {
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
-  addPlaceToDB(){
+  addPlaceToDB() {
     console.log('Vehicle Added');
     console.log('Closing Modal');
   }
 
-  addPlacePicture(){
+  addPlacePicture() {
     console.log('Picture Added');
   }
 
