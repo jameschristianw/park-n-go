@@ -54,11 +54,15 @@ export class ManageVehicleService {
   editVehicle(emailOwner: string, plate: string, model: string, type: string, id: string | null) {
     console.log('Edit Vehicle Service');
     // @ts-ignore
-    this.vehicleCollection.doc<Vehicle>(id).update({
+    return this.vehicleCollection.doc<Vehicle>(id).update({
       email: emailOwner,
       vehicleModel: model,
       vehicleType: type === 'Car' ? 'Car' : 'Motorcycle',
       plateNo: plate
     });
+  }
+
+  deleteVehicle(id: string | null){
+    return this.vehicleCollection.doc<Vehicle>(id).delete();
   }
 }

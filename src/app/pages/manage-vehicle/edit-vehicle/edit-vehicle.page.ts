@@ -15,7 +15,7 @@ import { Vehicle } from '../../../model/vehicle.model';
 export class EditVehiclePage implements OnInit {
 
   vehicleId!: string | null;
-  @ViewChild('editVehicle', {static: true}) form!: NgForm;
+  @ViewChild('editVehicle', { static: true }) form!: NgForm;
   vType!: string;
   vModel!: string;
   plateNo!: string;
@@ -26,11 +26,12 @@ export class EditVehiclePage implements OnInit {
     private manageVehicleSvc: ManageVehicleService,
     private activatedRoute: ActivatedRoute,
     private storage: AsyncStorageService,
-    private firestore: AngularFirestore
-  ) { }
+    private firestore: AngularFirestore,
+  ) {
+  }
 
   async ngOnInit() {
-    this.activatedRoute.paramMap.subscribe( paramMap => {
+    this.activatedRoute.paramMap.subscribe(paramMap => {
       if (!paramMap.has('id')) {
         this.backToManage();
       }
@@ -40,10 +41,12 @@ export class EditVehiclePage implements OnInit {
 
       const data = this.firestore.doc<Vehicle>('vehicles/' + this.vehicleId);
       const result = data.valueChanges();
-      result.subscribe( res => {
-        // console.log(res.email);
+      result.subscribe(res => {
+        // @ts-ignore
         this.vType = res.vehicleType;
+        // @ts-ignore
         this.vModel = res.vehicleModel;
+        // @ts-ignore
         this.plateNo = res.plateNo;
       });
     });
@@ -51,7 +54,7 @@ export class EditVehiclePage implements OnInit {
 
   async editVehicleInDB() {
     const loading = await this.loadCtrl.create({
-      message: 'Editing your vehicle...'
+      message: 'Editing your vehicle...',
     });
     await loading.present();
 
@@ -62,6 +65,18 @@ export class EditVehiclePage implements OnInit {
     const email = await this.storage.get('token');
 
     await this.manageVehicleSvc.editVehicle(email, plate, model, type, this.vehicleId);
+
+    await loading.dismiss();
+    this.backToManage();
+  }
+
+  async deleteVehicleFromDB() {
+    const loading = await this.loadCtrl.create({
+      message: 'Deleting your vehicle...',
+    });
+    await loading.present();
+
+    await this.manageVehicleSvc.deleteVehicle(this.vehicleId);
 
     await loading.dismiss();
     this.backToManage();
