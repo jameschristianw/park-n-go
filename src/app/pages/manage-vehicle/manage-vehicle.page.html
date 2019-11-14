@@ -20,7 +20,7 @@
 <ion-content>
 
   <ion-list *ngFor="let v of vehicleList">
-    <ion-item lines="full" class="list-item">
+    <ion-item lines="full" class="list-item" [routerLink]="['/','edit-vehicle',v.id]">
       <div class="wrapper-vehicle">
         <h3 class="vehicle-name">{{ v.vehicleModel }}</h3>
         <ion-label class="plate">{{ v.plateNo }}</ion-label>
