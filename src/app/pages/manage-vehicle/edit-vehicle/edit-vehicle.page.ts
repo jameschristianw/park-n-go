@@ -14,11 +14,12 @@ import { Vehicle } from '../../../model/vehicle.model';
 })
 export class EditVehiclePage implements OnInit {
 
-  vehicleId!: string | null;
   @ViewChild('editVehicle', { static: true }) form!: NgForm;
   vType!: string;
   vModel!: string;
   plateNo!: string;
+  private vehicleId!: string;
+  private email!: string;
 
   constructor(
     private navCtrl: NavController,
@@ -26,17 +27,18 @@ export class EditVehiclePage implements OnInit {
     private manageVehicleSvc: ManageVehicleService,
     private activatedRoute: ActivatedRoute,
     private storage: AsyncStorageService,
-    private firestore: AngularFirestore,
-  ) {
-  }
+    private firestore: AngularFirestore
+  ) {}
 
   async ngOnInit() {
+    this.email = await this.storage.get('token');
+
     this.activatedRoute.paramMap.subscribe(paramMap => {
       if (!paramMap.has('id')) {
         this.backToManage();
       }
 
-      this.vehicleId = paramMap.get('id');
+      this.vehicleId = paramMap.get('id') + '';
       console.log(this.vehicleId);
 
       const data = this.firestore.doc<Vehicle>('vehicles/' + this.vehicleId);
@@ -76,13 +78,13 @@ export class EditVehiclePage implements OnInit {
     });
     await loading.present();
 
-    await this.manageVehicleSvc.deleteVehicle(this.vehicleId);
+    await this.manageVehicleSvc.deleteVehicle(this.vehicleId, this.email);
 
     await loading.dismiss();
     this.backToManage();
   }
 
   backToManage() {
-    this.navCtrl.navigateBack('account/manage-vehicle');
+    this.navCtrl.navigateBack('account/manage-vehicle').then(r => r);
   }
 }
