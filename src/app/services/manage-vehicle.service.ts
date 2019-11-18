@@ -51,12 +51,7 @@ export class ManageVehicleService {
 
   editVehicle(emailOwner: string, plate: string, model: string, type: string, id: string) {
     console.log('Edit Vehicle Service');
-<<<<<<< HEAD
     this.db.doc<Vehicle>('vehicles/' + id).update({
-=======
-    // @ts-ignore
-    return this.vehicleCollection.doc<Vehicle>(id).update({
->>>>>>> Edit Vehicle WIP - Add delete vehicle
       email: emailOwner,
       vehicleModel: model,
       vehicleType: type === 'Car' ? 'Car' : 'Motorcycle',
@@ -64,12 +59,7 @@ export class ManageVehicleService {
     });
   }
 
-<<<<<<< HEAD
   deleteVehicle(id: string, email: string) {
     return this.db.doc('vehicles/' + id).delete();
-=======
-  deleteVehicle(id: string | null){
-    return this.vehicleCollection.doc<Vehicle>(id).delete();
->>>>>>> Edit Vehicle WIP - Add delete vehicle
   }
 }
