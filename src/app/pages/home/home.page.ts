@@ -51,8 +51,13 @@ export class HomePage implements OnInit {
     await this.platform.ready();
     await this.loadMap();
   }
+<<<<<<< HEAD
 
   loadMap() {
+=======
+  loadMap() {
+
+>>>>>>> Init Google Map
     // This code is necessary for browser
     Environment.setEnv({
       API_KEY_FOR_BROWSER_RELEASE: 'AIzaSyAs-bPFk39cMX-gV34ksx3MrLXpcviS1NQ',
@@ -84,9 +89,12 @@ export class HomePage implements OnInit {
     marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
       alert('clicked');
     });
+<<<<<<< HEAD
 
     this.map.on(GoogleMapsEvent.CAMERA_MOVE).subscribe( loc => {
       console.log(loc[0].target.lat, loc[0].target.lng);
     });
+=======
+>>>>>>> Init Google Map
   }
 }
