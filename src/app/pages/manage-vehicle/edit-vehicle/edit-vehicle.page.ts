@@ -14,10 +14,6 @@ import { Vehicle } from '../../../model/vehicle.model';
 })
 export class EditVehiclePage implements OnInit {
 
-<<<<<<< HEAD
-=======
-  vehicleId!: string | null;
->>>>>>> Edit Vehicle WIP - Add delete vehicle
   @ViewChild('editVehicle', { static: true }) form!: NgForm;
   vType!: string;
   vModel!: string;
@@ -31,20 +27,12 @@ export class EditVehiclePage implements OnInit {
     private manageVehicleSvc: ManageVehicleService,
     private activatedRoute: ActivatedRoute,
     private storage: AsyncStorageService,
-<<<<<<< HEAD
     private firestore: AngularFirestore
   ) {}
 
   async ngOnInit() {
     this.email = await this.storage.get('token');
 
-=======
-    private firestore: AngularFirestore,
-  ) {
-  }
-
-  async ngOnInit() {
->>>>>>> Edit Vehicle WIP - Add delete vehicle
     this.activatedRoute.paramMap.subscribe(paramMap => {
       if (!paramMap.has('id')) {
         this.backToManage();
@@ -91,18 +79,6 @@ export class EditVehiclePage implements OnInit {
     await loading.present();
 
     await this.manageVehicleSvc.deleteVehicle(this.vehicleId, this.email);
-
-    await loading.dismiss();
-    this.backToManage();
-  }
-
-  async deleteVehicleFromDB() {
-    const loading = await this.loadCtrl.create({
-      message: 'Deleting your vehicle...',
-    });
-    await loading.present();
-
-    await this.manageVehicleSvc.deleteVehicle(this.vehicleId);
 
     await loading.dismiss();
     this.backToManage();
