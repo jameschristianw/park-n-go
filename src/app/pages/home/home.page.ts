@@ -97,8 +97,8 @@ export class HomePage implements OnInit {
 
     await this.loadMap(this.locLat, this.locLong);
   }
-<<<<<<< HEAD
 
+<<<<<<< HEAD
 <<<<<<< HEAD
   loadMap(locLat: number, locLong: number) {
 =======
@@ -108,6 +108,9 @@ export class HomePage implements OnInit {
 
 >>>>>>> Init Google Map
 >>>>>>> Init Google Map
+=======
+  loadMap(){
+>>>>>>> Init Google Maps
     // This code is necessary for browser
     Environment.setEnv({
       API_KEY_FOR_BROWSER_RELEASE: 'AIzaSyAs-bPFk39cMX-gV34ksx3MrLXpcviS1NQ',
@@ -140,6 +143,7 @@ export class HomePage implements OnInit {
     currMarker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
       alert('Current Location Marker Clicked !');
     });
+<<<<<<< HEAD
 <<<<<<< HEAD
 
     // GET CENTER POSITION
@@ -190,6 +194,8 @@ export class HomePage implements OnInit {
 =======
 >>>>>>> Init Google Map
 >>>>>>> Init Google Map
+=======
+>>>>>>> Init Google Maps
   }
 
   showBookingConfirmation() {}
