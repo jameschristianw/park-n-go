@@ -97,8 +97,17 @@ export class HomePage implements OnInit {
 
     await this.loadMap(this.locLat, this.locLong);
   }
+<<<<<<< HEAD
 
+<<<<<<< HEAD
   loadMap(locLat: number, locLong: number) {
+=======
+  loadMap() {
+=======
+  loadMap() {
+
+>>>>>>> Init Google Map
+>>>>>>> Init Google Map
     // This code is necessary for browser
     Environment.setEnv({
       API_KEY_FOR_BROWSER_RELEASE: 'AIzaSyAs-bPFk39cMX-gV34ksx3MrLXpcviS1NQ',
@@ -131,6 +140,7 @@ export class HomePage implements OnInit {
     currMarker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
       alert('Current Location Marker Clicked !');
     });
+<<<<<<< HEAD
 
     // GET CENTER POSITION
     // this.map.on(GoogleMapsEvent.CAMERA_MOVE).subscribe( loc => {
@@ -152,6 +162,7 @@ export class HomePage implements OnInit {
         alert('HALELUYA');
       });
     });
+<<<<<<< HEAD
 
     // const markerCluster: MarkerCluster = this.map.addMarkerClusterSync({
     //   markers: this.locations,
@@ -175,6 +186,10 @@ export class HomePage implements OnInit {
     //   marker.setSnippet(marker.get("address"));
     //   marker.showInfoWindow();
     // });
+=======
+=======
+>>>>>>> Init Google Map
+>>>>>>> Init Google Map
   }
 
   showBookingConfirmation() {}
