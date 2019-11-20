@@ -18,6 +18,7 @@ export class HomePage implements OnInit {
   user!: UserViewModel;
   places: PlaceViewModel[] = [];
   vehicles: VehicleViewModel[] = [];
+  markerClick = false;
 
   image = 'https://miro.medium.com/max/4064/1*qYUvh-EtES8dtgKiBRiLsA.png';
 
@@ -82,7 +83,7 @@ export class HomePage implements OnInit {
       }
     });
     marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-      alert('clicked');
+      // alert('clicked');
     });
   }
 }
