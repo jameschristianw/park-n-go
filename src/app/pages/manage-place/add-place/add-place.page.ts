@@ -14,7 +14,6 @@ import { PickLocationComponent } from '../../../components/pick-location/pick-lo
 
 export class AddPlacePage implements OnInit {
 
-
   private locLat!: number;
   private locLng!: number;
 
@@ -28,7 +27,6 @@ export class AddPlacePage implements OnInit {
     locLatitude: 0,
     locLongitude: 0,
   };
-
 
   @ViewChild('addPlace', { static: true }) form!: NgForm;
   private emailUser!: string;
