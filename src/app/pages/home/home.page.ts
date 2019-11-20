@@ -18,6 +18,7 @@ export class HomePage implements OnInit {
   user!: UserViewModel;
   places: PlaceViewModel[] = [];
   vehicles: VehicleViewModel[] = [];
+  markerClick = false;
 
   image = 'https://miro.medium.com/max/4064/1*qYUvh-EtES8dtgKiBRiLsA.png';
 
@@ -52,7 +53,7 @@ export class HomePage implements OnInit {
     await this.loadMap();
   }
 
-  loadMap() {
+  loadMap(){
     // This code is necessary for browser
     Environment.setEnv({
       API_KEY_FOR_BROWSER_RELEASE: 'AIzaSyAs-bPFk39cMX-gV34ksx3MrLXpcviS1NQ',
@@ -82,11 +83,7 @@ export class HomePage implements OnInit {
       }
     });
     marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-      alert('clicked');
-    });
-
-    this.map.on(GoogleMapsEvent.CAMERA_MOVE).subscribe( loc => {
-      console.log(loc[0].target.lat, loc[0].target.lng);
+      // alert('clicked');
     });
   }
 }
