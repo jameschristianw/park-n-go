@@ -98,19 +98,7 @@ export class HomePage implements OnInit {
     await this.loadMap(this.locLat, this.locLong);
   }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
   loadMap(locLat: number, locLong: number) {
-=======
-  loadMap() {
-=======
-  loadMap() {
-
->>>>>>> Init Google Map
->>>>>>> Init Google Map
-=======
-  loadMap(){
->>>>>>> Init Google Maps
     // This code is necessary for browser
     Environment.setEnv({
       API_KEY_FOR_BROWSER_RELEASE: 'AIzaSyAs-bPFk39cMX-gV34ksx3MrLXpcviS1NQ',
@@ -143,13 +131,6 @@ export class HomePage implements OnInit {
     currMarker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
       alert('Current Location Marker Clicked !');
     });
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-    // GET CENTER POSITION
-    // this.map.on(GoogleMapsEvent.CAMERA_MOVE).subscribe( loc => {
-    //   console.log(loc[0].target.lat, loc[0].target.lng);
-    // });
 
     console.log('Before Loop');
 
@@ -166,36 +147,6 @@ export class HomePage implements OnInit {
         alert('HALELUYA');
       });
     });
-<<<<<<< HEAD
-
-    // const markerCluster: MarkerCluster = this.map.addMarkerClusterSync({
-    //   markers: this.locations,
-    //   icons: [
-    //     {
-    //       min: 3, max:9,
-    //       url: '',
-    //       label: { color: "white" }
-    //     },
-    //     {
-    //       min: 3, max:9,
-    //       url: '',
-    //       label: { color: "white" }
-    //     },
-    //   ]
-    // });
-
-    // markerCluster.on(GoogleMapsEvent.MARKER_CLICK).subscribe((params) => {
-    //   const marker: Marker = params[1];
-    //   marker.setTitle(marker.get("name"));
-    //   marker.setSnippet(marker.get("address"));
-    //   marker.showInfoWindow();
-    // });
-=======
-=======
->>>>>>> Init Google Map
->>>>>>> Init Google Map
-=======
->>>>>>> Init Google Maps
   }
 
   showBookingConfirmation() {}
