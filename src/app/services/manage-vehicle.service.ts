@@ -3,7 +3,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Vehicle, VehicleViewModel } from '../model/vehicle.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AsyncStorageService } from '../native/async-storage.service';
 
 @Injectable({
   providedIn: 'root',
