@@ -55,6 +55,14 @@ const routes: Routes = [
       './pages/manage-place/edit-place/edit-place.module#EditPlacePageModule',
   },
   {
+    path: 'booking/:id',
+    loadChildren: './pages/booking/booking.module#BookingPageModule',
+  },
+  {
+    path: 'booking/:id/:price',
+    loadChildren: './pages/booking/booking.module#BookingPageModule',
+  },
+  {
     path: 'booking',
     loadChildren: './pages/booking/booking.module#BookingPageModule',
   },

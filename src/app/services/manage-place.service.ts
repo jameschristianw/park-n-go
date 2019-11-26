@@ -2,22 +2,24 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Place } from '../model/place.model';
+import { Place, PlaceViewModel } from '../model/place.model';
+
 // import { filter } from 'rxjs/operators';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ManagePlaceService {
 
   private placesCollection!: AngularFirestoreCollection<Place>;
-  private places!: Observable<Place[]>;
+  private places!: Observable<PlaceViewModel[]>;
   private myPlacesCollection!: AngularFirestoreCollection<Place>;
-  private myPlaces!: Observable<Place[]>
-  
+  private myPlaces!: Observable<Place[]>;
 
-  constructor(private db: AngularFirestore) {}
+
+  constructor(private db: AngularFirestore) {
+  }
 
   getMyPlaces(email: string) {
     this.myPlacesCollection = this.db.collection<Place>('places', (ref) =>
@@ -31,23 +33,23 @@ export class ManagePlaceService {
           const id = a.payload.doc.data();
           return { id, ...data };
         });
-      })
+      }),
     );
 
     return this.myPlaces;
   }
 
   getAllPlaces() {
-    this.placesCollection = this.db.collection<Place>('places');
+    this.placesCollection = this.db.collection<PlaceViewModel>('places');
 
     this.places = this.placesCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
           const data = a.payload.doc.data();
           const id = a.payload.doc.id;
-          return { id, ...data};
+          return { id, ...data };
         });
-      })
+      }),
     );
 
     return this.places;

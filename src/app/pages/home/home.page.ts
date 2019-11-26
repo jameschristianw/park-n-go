@@ -1,7 +1,7 @@
 import { ManagePlaceService } from './../../services/manage-place.service';
 import { Platform } from '@ionic/angular';
 import { VehicleViewModel } from './../../model/vehicle.model';
-import { Place } from './../../model/place.model';
+import { PlaceViewModel } from './../../model/place.model';
 import { AsyncStorageService } from './../../native/async-storage.service';
 import { UserViewModel } from './../../model/user.model';
 import { UserService } from './../user.service';
@@ -25,11 +25,15 @@ import { Locations } from './../../model/location.model';
 export class HomePage implements OnInit {
   map!: GoogleMap;
   user!: UserViewModel;
-  places: Place[] = [];
+  places: PlaceViewModel[] = [];
   vehicles: VehicleViewModel[] = [];
   locations: Locations[] = [];
   private locLat: any;
   private locLong: any;
+  cardAreaName = '';
+  cardAddress = '';
+  cardPricePerHour = '';
+  cardPlaceId = '';
 
   image = 'https://miro.medium.com/max/4064/1*qYUvh-EtES8dtgKiBRiLsA.png';
 
@@ -76,7 +80,11 @@ export class HomePage implements OnInit {
 
         const newMarker: Marker = this.map.addMarkerSync(location);
         newMarker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-          alert('HALELUYA');
+          this.cardAreaName = it.areaName;
+          this.cardAddress = it.address;
+          this.cardPricePerHour = String(it.pricePerHour);
+          this.cardPlaceId = it.id;
+          console.log(it);
         });
       });
     });
@@ -98,7 +106,7 @@ export class HomePage implements OnInit {
     await this.loadMap(this.locLat, this.locLong);
   }
 
-  loadMap(locLat: number, locLong: number) {
+ async loadMap(locLat: number, locLong: number) {
     // This code is necessary for browser
     Environment.setEnv({
       API_KEY_FOR_BROWSER_RELEASE: 'AIzaSyAs-bPFk39cMX-gV34ksx3MrLXpcviS1NQ',
@@ -129,25 +137,11 @@ export class HomePage implements OnInit {
     });
 
     currMarker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-      alert('Current Location Marker Clicked !');
-    });
-
-    console.log('Before Loop');
-
-    this.locations.forEach((data) => {
-      console.log('NEW MARKER');
-      const newMarker: Marker = this.map.addMarkerSync({
-        title: data.title,
-        position: {
-          lat: data.position.lat,
-          lng: data.position.lng,
-        },
-      });
-      newMarker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-        alert('HALELUYA');
-      });
+      // alert('Current Location Marker Clicked !');
     });
   }
 
-  showBookingConfirmation() {}
+  showBookingConfirmation(id: string) {
+    console.log(id);
+  }
 }
