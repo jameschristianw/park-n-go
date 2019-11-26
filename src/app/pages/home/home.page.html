@@ -8,19 +8,16 @@
           </ion-input>
         </div>
 
-        <div class="card">
+        <div class="card" *ngIf="cardAddress && cardAreaName && cardPricePerHour">
           <div class="flex">
             <ion-label class="place">
               <h2 class="name">
-                Carpark Cluster Newton
+                {{ cardAreaName }}
               </h2>
-              <p class="address">Cluster Newton, Gading Serpong, Ta...</p>
+              <p class="address">{{ cardAddress }}</p>
             </ion-label>
             <div class="slot-wrapper">
-              <h3 class="slot">
-                6
-              </h3>
-              <p class="slot-caption">SLOT<br />AVAILABLE</p>
+              <p class="slot-caption">PARKING<br />AVAILABLE</p>
             </div>
           </div>
           <div class="divider">&nbsp;</div>
@@ -28,17 +25,23 @@
             <ion-label class="place">
               <h3>
                 <b>
-                  Rp 6000 / hour
+                  Rp {{ cardPricePerHour }} / hour
                 </b>
               </h3>
             </ion-label>
+
+<!--            <ion-button-->
+<!--              color="secondary"-->
+<!--              (click)="showBookingConfirmation(cardPlaceId)"-->
+<!--              class="book"-->
+<!--              >Book now</ion-button>-->
+
             <ion-button
               color="secondary"
-              (click)="showBookingConfirmation()"
-              [routerLink]="['/', 'booking']"
+              (click)="showBookingConfirmation(cardPlaceId)"
+              [routerLink]="['/', 'booking', cardPlaceId, cardPricePerHour]"
               class="book"
-              >Book now</ion-button
-            >
+            >Book now</ion-button>
           </div>
         </div>
       </div>
