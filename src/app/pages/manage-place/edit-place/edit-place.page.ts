@@ -25,10 +25,10 @@ export class EditPlacePage implements OnInit {
     pricePerHour: 0,
     locLatitude: 0,
     locLongitude: 0,
-    booked: false
   };
   locLat!: number;
   locLng!: number;
+  locLatLng = false;
 
   constructor(
     private navCtrl: NavController,
@@ -65,27 +65,25 @@ export class EditPlacePage implements OnInit {
 
   async editPlaceLatLng() {
     const modal = await this.modalCtrl.create({
-      component: PickLocationComponent,
-      // componentProps: {lat: }
+      component: PickLocationComponent
     });
 
     await modal.present();
 
     await modal.onDidDismiss().then((location) => {
-      console.log('add place page ts', location);
-      console.log('add place page ts', location.data.lat, location.data.lng);
-      this.locLat = location.data.lat;
-      this.locLng = location.data.lng;
-    }).then( () => {
-      // this.locLatLng = true;
+      console.log('edit place page ts', location);
+      if (location.data !== undefined) {
+        console.log('edit place page ts', location.data.lat, location.data.lng);
+        this.locLat = location.data.lat;
+        this.locLng = location.data.lng;
+      } else {
+        console.log('edit location canceled');
+        this.locLat = -6.1753871;
+        this.locLng = 106.8249641;
+      }
+    }).then(() => {
+      this.locLatLng = true;
     });
-    // await modal.dismiss((location: { lat: number; lng: number; }) => {
-    //   console.log(location.lat, location.lng);
-    //   this.locLat = location.lat;
-    //   this.locLng = location.lng;
-    // }).then( () => {
-    //   // this.locLatLng = true;
-    // });
   }
 
   async editPlaceInDB() {
@@ -100,7 +98,6 @@ export class EditPlacePage implements OnInit {
     const locLatitude = this.locLat;
     const locLongitude = this.locLng;
     const email = await this.storage.get('token');
-    const booked = false;
 
     console.log(areaName, address, pricePerHour, locLatitude, locLongitude, email);
 
@@ -111,7 +108,6 @@ export class EditPlacePage implements OnInit {
       pricePerHour,
       locLatitude,
       locLongitude,
-      booked
     };
 
     console.log(this.place);
