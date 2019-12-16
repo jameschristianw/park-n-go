@@ -10,12 +10,40 @@
     <ion-segment-button value="places">Places</ion-segment-button>
   </ion-segment>
 
-  <div *ngIf="segmentedValue == 'parking'" class="list">
-    <p>There are no parking history.</p>
+  <div *ngIf="segmentedValue == 'parking'" >
+    <div *ngIf="vehicleHistory">
+      <ion-list *ngFor="let v of vehicleHistory">
+        <ion-item lines="full" class="list-item">
+          <div class="wrapper-place">
+            <h3 class="place-name">{{ v.customerPlateNo }}</h3>
+            <ion-label class="plate">Parking Info: {{ v.placeId }}</ion-label>
+          </div>
+          <ion-img
+                  style="width: 80px; height: 80px;"
+                  src="http://www.desertsun.co.uk/blog/images/Apartment%201.jpg"
+          ></ion-img>
+        </ion-item>
+      </ion-list>
+    </div>
+    <p *ngIf="!vehicleHistory" class="list">There are no parking history.</p>
   </div>
 
-  <div *ngIf="segmentedValue == 'places'" class="list">
-    <p>There are no rent parking places history.</p>
+  <div *ngIf="segmentedValue == 'places'">
+    <div *ngIf="placeHistory">
+      <ion-list *ngFor="let p of placeHistory">
+        <ion-item lines="full" class="list-item">
+          <div class="wrapper-place">
+            <h3 class="place-name">{{ p.placeId }}</h3>
+            <ion-label class="plate">Car Parked: {{ p.customerPlateNo }}</ion-label>
+          </div>
+          <ion-img
+                  style="width: 80px; height: 80px;"
+                  src="http://www.desertsun.co.uk/blog/images/Apartment%201.jpg"
+          ></ion-img>
+        </ion-item>
+      </ion-list>
+    </div>
+    <p *ngIf="!placeHistory" class="list">There are no rent parking places history.</p>
   </div>
 
   <!-- <div [ngSwitch]="segmentedValue">

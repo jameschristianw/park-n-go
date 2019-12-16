@@ -25,6 +25,7 @@ export class EditPlacePage implements OnInit {
     pricePerHour: 0,
     locLatitude: 0,
     locLongitude: 0,
+    booked: false
   };
   locLat!: number;
   locLng!: number;
@@ -70,13 +71,21 @@ export class EditPlacePage implements OnInit {
 
     await modal.present();
 
-    await modal.dismiss((location: { lat: number; lng: number; }) => {
-      console.log(location.lat, location.lng);
-      this.locLat = location.lat;
-      this.locLng = location.lng;
+    await modal.onDidDismiss().then((location) => {
+      console.log('add place page ts', location);
+      console.log('add place page ts', location.data.lat, location.data.lng);
+      this.locLat = location.data.lat;
+      this.locLng = location.data.lng;
     }).then( () => {
       // this.locLatLng = true;
     });
+    // await modal.dismiss((location: { lat: number; lng: number; }) => {
+    //   console.log(location.lat, location.lng);
+    //   this.locLat = location.lat;
+    //   this.locLng = location.lng;
+    // }).then( () => {
+    //   // this.locLatLng = true;
+    // });
   }
 
   async editPlaceInDB() {
@@ -88,9 +97,10 @@ export class EditPlacePage implements OnInit {
     const areaName = this.form.value.areaName;
     const address = this.form.value.address;
     const pricePerHour = this.form.value.pricePerHour;
-    const locLatitude = 0;
-    const locLongitude = 0;
+    const locLatitude = this.locLat;
+    const locLongitude = this.locLng;
     const email = await this.storage.get('token');
+    const booked = false;
 
     console.log(areaName, address, pricePerHour, locLatitude, locLongitude, email);
 
@@ -101,6 +111,7 @@ export class EditPlacePage implements OnInit {
       pricePerHour,
       locLatitude,
       locLongitude,
+      booked
     };
 
     console.log(this.place);

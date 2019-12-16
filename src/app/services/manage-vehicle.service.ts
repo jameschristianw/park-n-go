@@ -35,6 +35,27 @@ export class ManageVehicleService {
     return this.vehiclesObservable;
   }
 
+  getUnparkedVehicles(email: string) {
+    const vehicleCollection = this.db.collection<Vehicle>('vehicles', (ref) =>
+      ref.where('email', '==', email).where('parked', '==', false),
+    );
+    console.log('Manage Vehicle Service getVehicles', vehicleCollection);
+
+    this.vehiclesObservable = vehicleCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      }),
+    );
+
+    console.log('Manage Vehicle Service getVehicles', this.vehiclesObservable);
+
+    return this.vehiclesObservable;
+  }
+
   addVehicles(emailOwner: string, plate: string, model: string, type: string) {
     const vehicleCollection = this.db.collection<Vehicle>('vehicles', (ref) =>
       ref.where('email', '==', emailOwner),
@@ -45,6 +66,7 @@ export class ManageVehicleService {
       vehicleModel: model,
       email: emailOwner,
       plateNo: plate,
+      parked: false
     });
   }
 

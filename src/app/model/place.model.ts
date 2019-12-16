@@ -6,6 +6,7 @@ export interface Place {
   pricePerHour: number;
   locLatitude: number;
   locLongitude: number;
+  booked: boolean;
 }
 
 export type PlaceViewModel = Place & { id: string };

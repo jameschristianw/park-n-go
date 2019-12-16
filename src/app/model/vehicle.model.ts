@@ -3,6 +3,7 @@ export interface Vehicle {
   vehicleModel: string;
   plateNo: string;
   email: string;
+  parked: boolean;
 }
 
 export type VehicleViewModel = Vehicle & {

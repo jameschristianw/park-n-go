@@ -1,7 +1,8 @@
 {
   "name": "Park N Go",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }

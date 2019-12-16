@@ -24,7 +24,8 @@
               <p class="address">{{ cardAddress }}</p>
             </ion-label>
             <div class="slot-wrapper">
-              <p class="slot-caption">PARKING<br />AVAILABLE</p>
+              <p class="slot-caption" *ngIf="!booked">PARKING<br />AVAILABLE</p>
+              <p class="slot-caption" *ngIf="booked">PARKING<br />NOT AVAILABLE</p>
             </div>
           </div>
           <div class="divider">&nbsp;</div>
@@ -47,7 +48,7 @@
               color="secondary"
               (click)="showBookingConfirmation(cardPlaceId)"
               [routerLink]="['/', 'booking', cardPlaceId, cardPricePerHour]"
-              class="book"
+              class="book" [disabled]="booked"
             >Book now</ion-button>
           </div>
         </div>
