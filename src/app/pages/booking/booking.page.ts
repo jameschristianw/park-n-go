@@ -145,6 +145,7 @@ export class BookingPage implements OnInit {
       leavingDateTime: this.leavingDateTime,
       totalPrice: this.totalPrice,
       createdAt: created,
+      ongoing: true,
     });
 
     console.log(res);

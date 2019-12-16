@@ -28,6 +28,7 @@ export class EditPlacePage implements OnInit {
   };
   locLat!: number;
   locLng!: number;
+  locLatLng = false;
 
   constructor(
     private navCtrl: NavController,
@@ -64,18 +65,24 @@ export class EditPlacePage implements OnInit {
 
   async editPlaceLatLng() {
     const modal = await this.modalCtrl.create({
-      component: PickLocationComponent,
-      // componentProps: {lat: }
+      component: PickLocationComponent
     });
 
     await modal.present();
 
-    await modal.dismiss((location: { lat: number; lng: number; }) => {
-      console.log(location.lat, location.lng);
-      this.locLat = location.lat;
-      this.locLng = location.lng;
-    }).then( () => {
-      // this.locLatLng = true;
+    await modal.onDidDismiss().then((location) => {
+      console.log('edit place page ts', location);
+      if (location.data !== undefined) {
+        console.log('edit place page ts', location.data.lat, location.data.lng);
+        this.locLat = location.data.lat;
+        this.locLng = location.data.lng;
+      } else {
+        console.log('edit location canceled');
+        this.locLat = -6.1753871;
+        this.locLng = 106.8249641;
+      }
+    }).then(() => {
+      this.locLatLng = true;
     });
   }
 
@@ -88,8 +95,8 @@ export class EditPlacePage implements OnInit {
     const areaName = this.form.value.areaName;
     const address = this.form.value.address;
     const pricePerHour = this.form.value.pricePerHour;
-    const locLatitude = 0;
-    const locLongitude = 0;
+    const locLatitude = this.locLat;
+    const locLongitude = this.locLng;
     const email = await this.storage.get('token');
 
     console.log(areaName, address, pricePerHour, locLatitude, locLongitude, email);
