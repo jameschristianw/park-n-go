@@ -25,6 +25,7 @@ export class EditPlacePage implements OnInit {
     pricePerHour: 0,
     locLatitude: 0,
     locLongitude: 0,
+    booked: false
   };
   locLat!: number;
   locLng!: number;
@@ -84,6 +85,13 @@ export class EditPlacePage implements OnInit {
     }).then(() => {
       this.locLatLng = true;
     });
+    // await modal.dismiss((location: { lat: number; lng: number; }) => {
+    //   console.log(location.lat, location.lng);
+    //   this.locLat = location.lat;
+    //   this.locLng = location.lng;
+    // }).then( () => {
+    //   // this.locLatLng = true;
+    // });
   }
 
   async editPlaceInDB() {
@@ -98,6 +106,7 @@ export class EditPlacePage implements OnInit {
     const locLatitude = this.locLat;
     const locLongitude = this.locLng;
     const email = await this.storage.get('token');
+    const booked = false;
 
     console.log(areaName, address, pricePerHour, locLatitude, locLongitude, email);
 
@@ -108,6 +117,7 @@ export class EditPlacePage implements OnInit {
       pricePerHour,
       locLatitude,
       locLongitude,
+      booked
     };
 
     console.log(this.place);

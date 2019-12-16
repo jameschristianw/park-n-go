@@ -10,6 +10,9 @@ import { VehicleViewModel } from '../../model/vehicle.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { SuccessComponent } from '../../components/booking/success/success.component';
 import { FailComponent } from '../../components/booking/fail/fail.component';
+import { Place, PlaceViewModel } from '../../model/place.model';
+import { Bookings } from '../../model/booking.model';
+import { ManagePlaceService } from '../../services/manage-place.service';
 
 @Component({
   selector: 'app-booking',
@@ -24,6 +27,10 @@ export class BookingPage implements OnInit {
   plateNo!: string;
   arrivalTime!: string;
   leavingTime!: string;
+
+  placeInfo!: PlaceViewModel;
+  placeEmailOwner!: string;
+  placeBooked!: boolean;
 
   vehicleList: VehicleViewModel [] = [];
   buttons: any[] = [];
@@ -44,7 +51,8 @@ export class BookingPage implements OnInit {
     private storage: AsyncStorageService,
     private vehicleSvc: ManageVehicleService,
     private db: AngularFirestore,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private placeSvc: ManagePlaceService,
   ) {
   }
 
@@ -58,11 +66,22 @@ export class BookingPage implements OnInit {
       this.pricePerHour = Number(paramMap.get('price'));
       this.duration = '-';
       this.plateNo = '-';
-      //
-      // this.arrivalDateTime = Date.parse(new Date(this.form.value.arrivalDateTime).toISOString());
-      // this.leavingDateTime = Date.parse(new Date(this.form.value.leavingDateTime).toISOString());
-      // const diff = this.leavingDateTime - this.arrivalDateTime;
-      // console.log(diff);
+
+      this.getPlaceInfo().then(r => r);
+    });
+  }
+
+  async getPlaceInfo() {
+    const data = this.db.doc<Place>('places/' + this.placeId).valueChanges();
+    data.subscribe(r => {
+      console.log('Booking Page ts place info: ', r);
+      // @ts-ignore
+      this.placeEmailOwner = r.email;
+      // @ts-ignore
+      if (r.booked == null) { r.booked = false; }
+      // @ts-ignore
+      this.placeBooked = r.booked;
+      console.log(this.placeEmailOwner);
     });
   }
 
@@ -98,7 +117,7 @@ export class BookingPage implements OnInit {
   async changeVehicle() {
     const email = await this.storage.get('token');
 
-    await this.vehicleSvc.getVehicles(email).subscribe(res => {
+    await this.vehicleSvc.getUnparkedVehicles(email).subscribe(res => {
       this.vehicleList = [];
       this.vehicleList = res;
       console.log('Booking', this.vehicleList);
@@ -136,17 +155,20 @@ export class BookingPage implements OnInit {
     console.log(email, this.plateNo, this.placeId, this.duration, this.arrivalDateTime, this.leavingDateTime, this.totalPrice, created);
 
 
-    const res = this.db.collection('bookings').add({
+    const res = this.db.collection<Bookings>('bookings').add({
       customerEmail: email,
       customerPlateNo: this.plateNo,
       placeId: this.placeId,
+      placeEmailOwner: this.placeEmailOwner,
       duration: this.duration,
-      arrivalDateTime: this.arrivalDateTime,
-      leavingDateTime: this.leavingDateTime,
+      arrivalDateTime: this.arrivalTime,
+      leavingDateTime: this.leavingTime,
       totalPrice: this.totalPrice,
       createdAt: created,
       ongoing: true,
     });
+
+    await this.placeSvc.updateBookedPlace(this.placeId, this.placeBooked);
 
     console.log(res);
 

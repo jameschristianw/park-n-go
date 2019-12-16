@@ -26,6 +26,8 @@ export class ManagePlaceService {
       ref.where('email', '==', email),
     );
 
+    console.log('Manage place service ts:', this.myPlacesCollection);
+
     this.myPlaces = this.myPlacesCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -71,4 +73,15 @@ export class ManagePlaceService {
     return this.placesCollection.doc(id).delete();
   }
 
+  updateBookedPlace(id: string, booked: boolean) {
+    if (booked) {
+      return this.placesCollection.doc(id).update({
+        booked: false
+      });
+    } else {
+      return this.placesCollection.doc(id).update({
+        booked: true
+      });
+    }
+  }
 }

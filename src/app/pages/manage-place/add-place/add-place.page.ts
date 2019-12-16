@@ -26,6 +26,7 @@ export class AddPlacePage implements OnInit {
     pricePerHour: 0,
     locLatitude: 0,
     locLongitude: 0,
+    booked: false,
   };
 
   @ViewChild('addPlace', { static: true }) form!: NgForm;
@@ -52,6 +53,7 @@ export class AddPlacePage implements OnInit {
     const locLongitude = this.locLng;
 
     const email = this.emailUser;
+    const booked = false;
 
     this.places = {
       address,
@@ -60,6 +62,7 @@ export class AddPlacePage implements OnInit {
       locLatitude,
       locLongitude,
       pricePerHour,
+      booked
     };
 
     console.log(this.places);
