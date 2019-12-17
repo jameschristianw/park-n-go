@@ -25,10 +25,12 @@ export class EditPlacePage implements OnInit {
     pricePerHour: 0,
     locLatitude: 0,
     locLongitude: 0,
+    booked: false,
   };
   locLat!: number;
   locLng!: number;
   locLatLng = false;
+  booked!: boolean;
 
   constructor(
     private navCtrl: NavController,
@@ -59,6 +61,8 @@ export class EditPlacePage implements OnInit {
         this.address = res.address;
         // @ts-ignore
         this.pricePerHour = res.pricePerHour;
+        // @ts-ignore
+        this.booked = res.booked;
       });
     });
   }
@@ -98,6 +102,7 @@ export class EditPlacePage implements OnInit {
     const locLatitude = this.locLat;
     const locLongitude = this.locLng;
     const email = await this.storage.get('token');
+    const booked = this.booked;
 
     console.log(areaName, address, pricePerHour, locLatitude, locLongitude, email);
 
@@ -108,6 +113,7 @@ export class EditPlacePage implements OnInit {
       pricePerHour,
       locLatitude,
       locLongitude,
+      booked
     };
 
     console.log(this.place);
