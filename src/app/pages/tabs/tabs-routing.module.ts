@@ -19,10 +19,17 @@ const routes: Routes = [
             path: '',
             loadChildren: '../history/history.module#HistoryPageModule',
           },
+          // {
+          //   path:
+          //     'vehicle/:ownerId/:placeId/
+          //     :vehiclePlateNo/:vehicleType/:vehicleModel/:duration/:price/:arrivalTime/:leavingTime/:createdAt',
+          //   loadChildren: '../history/vehicle/vehicle.module#VehiclePageModule',
+          // },
           {
             path:
-              'vehicle/:bookId/:ownerId/:placeId/:vehiclePlateNo/:vehicleType/:vehicleModel/:duration/:price/:arrivalTime/:leavingTime/:createdAt',
-            loadChildren: '../history/vehicle/vehicle.module#VehiclePageModule',
+            // tslint:disable-next-line:max-line-length
+              'place/:custEmail/:vehiclePlateNo/:vehicleModel/:vehicleType/:address/:placeName/:duration/:price/:arrivalTime/:createdAt/:leavingTime',
+            loadChildren: '../history/place/place.module#PlacePageModule',
           },
         ],
       },
@@ -39,4 +46,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class TabsRoutingModule {}
+export class TabsRoutingModule {
+}

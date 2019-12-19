@@ -64,6 +64,8 @@ export class HistoryPage implements OnInit {
       console.log('ini owner', res[0].placeEmailOwner);
 
       this.placeHistory = res;
+
+      console.log(this.placeHistory);
     });
   }
 
@@ -127,32 +129,27 @@ export class HistoryPage implements OnInit {
   onPlaceClick(idx: number) {
     if (this.placeHistory[idx].ongoing) {
       // TODO : redirect to placeHistoryDetail
-      // let {
-      //   customerEmail,
-      //   customerPlateNo,
-      //   address,
-      //   placeName,
-      //   duration,
-      //   totalPrice,
-      //   arrivalDateTime,
-      //   createdAt,
-      //   leavingDateTime,
-      // } = this.placeHistory[idx];
-      //   this.router.navigate([
+      const {
+        customerEmail,
+        customerPlateNo, vehicleModel, vehicleType,
+        address, placeName,
+        duration, totalPrice, arrivalDateTime, createdAt, leavingDateTime,
+      } = this.placeHistory[idx];
+      this.router.navigate([
       //   '/', <- tinggal uncomment, ganti route detail history vehicle
-      //     '/',
-      //     'history',
-      //     'place',
-      //     customerEmail,
-      //     customerPlateNo,
-      //     address,
-      //     placeName,
-      //     duration,
-      //     totalPrice,
-      //     arrivalDateTime,
-      //     createdAt,
-      //     leavingDateTime,
-      //   ]);
+        '/',
+        'tabs',
+        'history',
+        'place',
+        customerEmail,
+        customerPlateNo, vehicleModel, vehicleType,
+        address, placeName,
+        duration, totalPrice, arrivalDateTime, createdAt, leavingDateTime,
+      ]);
+
+      // this.router.navigate([
+      //   '/', 'detail-place'
+      // ]);
     }
   }
 }
