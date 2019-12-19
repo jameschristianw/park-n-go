@@ -43,6 +43,7 @@ export class VehiclePage implements OnInit {
   vehicleId!: string;
   vehicleType!: string;
   vehicleModel!: string;
+
   duration!: any;
   price!: any;
   arrivalTime!: Date;
@@ -74,8 +75,8 @@ export class VehiclePage implements OnInit {
         this.vehicleId = paramMap.get('vehicleId') || '';
         this.vehicleType = paramMap.get('vehicleType') || '';
         this.vehicleModel = paramMap.get('vehicleModel') || '';
-        this.duration = paramMap.get('duration') || '';
-        this.price = paramMap.get('price') || '';
+        this.duration = Number(paramMap.get('duration')) || 0;
+        this.price = Number(paramMap.get('price')) || 0;
 
         const arrTime = paramMap.get('arrivalTime') || '';
         const leavingTime = paramMap.get('leavingTime') || '';

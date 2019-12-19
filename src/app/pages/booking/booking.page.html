@@ -1,7 +1,10 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons>
-      <ion-back-button slot="start" defaultHref="/tabs/parking"></ion-back-button>
+      <ion-back-button
+        slot="start"
+        defaultHref="/tabs/parking"
+      ></ion-back-button>
     </ion-buttons>
     <ion-title>Booking Confirmation</ion-title>
   </ion-toolbar>
@@ -15,9 +18,15 @@
           <!-- <h3 class="vehicle-name">{{ v.vehicleModel }}</h3>
           <ion-label class="plate">{{ v.plateNo }}</ion-label> -->
           <h3 class="key">Vehicle</h3>
-          <ion-label class="plate value">{{ plateNo }}</ion-label>
+          <ion-label class="plate">{{ plateNo }}</ion-label>
         </div>
-        <ion-button fill="clear" class="change-vehicle" (click)="changeVehicle()"> Change </ion-button>
+        <ion-button
+          fill="clear"
+          class="change-vehicle"
+          (click)="changeVehicle()"
+        >
+          Change
+        </ion-button>
       </ion-item>
       <ion-item lines="full" class="list-item">
         <h3 class="key">Arrival</h3>
@@ -95,7 +104,7 @@
       </ion-item>
       <ion-item lines="full" class="list-item">
         <h3 class="key">Duration</h3>
-<!--        <h3 class="value" name="duration" [(ngModel)]="duration"></h3>-->
+        <!--        <h3 class="value" name="duration" [(ngModel)]="duration"></h3>-->
         <h3 class="value">{{ duration }} Hours</h3>
       </ion-item>
       <ion-item lines="full" class="list-item">
@@ -123,7 +132,8 @@
         class="booking-btn"
         color="primary"
         type="submit"
-        >Book Parking</ion-button>
+        >Book Parking</ion-button
+      >
     </div>
   </form>
 </ion-content>
