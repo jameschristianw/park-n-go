@@ -13,16 +13,6 @@
 <ion-content class="ion-padding">
   <form #editProfile="ngForm" (ngSubmit)="editProfileInDB()">
     <ion-list padding lines="full" class="ion-padding">
-      <ion-item class="input-container">
-        <ion-label position="stacked">Email</ion-label>
-        <ion-input
-                class="input"
-                required
-                inputmode="text"
-                name="userEmail"
-                [(ngModel)]="userEmail"
-        ></ion-input>
-      </ion-item>
 
       <ion-item class="input-container">
         <ion-label position="stacked">First Name</ion-label>

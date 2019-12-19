@@ -1,6 +1,7 @@
 export interface Bookings {
   customerEmail: string;
   customerPlateNo: string;
+  vehicleId: string;
   placeId: string;
   placeEmailOwner: string;
   duration: string;

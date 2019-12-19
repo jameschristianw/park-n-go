@@ -20,4 +20,5 @@ export const placeInitialValue: PlaceViewModel = {
   locLongitude: 0,
   booked: false,
   id: '',
+  imageUrl: '',
 };

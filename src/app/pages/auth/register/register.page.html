@@ -121,7 +121,8 @@
           user.password &&
           user.confirmPassword &&
           user.phoneNo
-        ) || user.password != user.confirmPassword
+        ) || user.password != user.confirmPassword ||
+        (user.password.length < 6 && user.confirmPassword < 6)
       "
       class="login"
       >Create account</ion-button

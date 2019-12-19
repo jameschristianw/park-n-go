@@ -1,5 +1,5 @@
 import {
-  ActionSheetController,
+  ActionSheetController, LoadingController,
   ModalController,
   NavController,
 } from '@ionic/angular';
@@ -26,7 +26,9 @@ export class BookingPage implements OnInit {
   pricePerHour!: number;
   totalPrice!: string;
   duration!: string;
-  plateNo!: string;
+  plateNo = '-';
+  vehicleId!: string;
+  vehicleParked!: boolean;
   arrivalTime!: string;
   leavingTime!: string;
 
@@ -42,6 +44,12 @@ export class BookingPage implements OnInit {
 
   arrivalTimeSet = false;
   leavingTimeSet = false;
+
+  availableFrom!: Date;
+  availableTo!: Date;
+  leavingToMax!: Date;
+
+  today = new Date(Date.now() + 7 * 60 * 60 * 1000);
 
   @ViewChild('bookingForm', { static: true }) form!: NgForm;
   leavingDateTime!: number;
@@ -59,7 +67,9 @@ export class BookingPage implements OnInit {
     private db: AngularFirestore,
     private modalCtrl: ModalController,
     private placeSvc: ManagePlaceService,
-  ) {}
+    private loadCtrl: LoadingController,
+  ) {
+  }
 
   async ionViewDidEnter() {
     this.activatedRoute.paramMap.subscribe((paramMap) => {
@@ -80,18 +90,30 @@ export class BookingPage implements OnInit {
       this.vehicleList = res;
 
       this.plateNo = this.vehicleList[0].plateNo;
+      this.vehicleId = this.vehicleList[0].id;
       this.vehicleList.forEach((v) => {
         this.buttons.push({
           text: v.plateNo,
           handler: () => {
             this.plateNo = v.plateNo;
+            this.vehicleId = v.id;
+            this.vehicleParked = v.parked;
           },
         });
       });
     });
   }
 
-  async ngOnInit() {}
+  async ngOnInit() {
+    console.log(this.today);
+    this.availableFrom = new Date(this.today.toISOString());
+
+    console.log(this.arrivalTime);
+    const dateTo = new Date(this.today.getTime() + 24 * 60 * 60 * 1000);
+    const dateToMax = new Date(dateTo.getTime() + 24 * 60 * 60 * 1000);
+    this.availableTo = new Date(dateTo);
+    this.leavingToMax = new Date(dateToMax);
+  }
 
   async getPlaceInfo() {
     const data = this.db.doc<Place>('places/' + this.placeId).valueChanges();
@@ -102,20 +124,18 @@ export class BookingPage implements OnInit {
         this.locLng = res.locLongitude;
         this.placeName = res.areaName;
         this.address = res.address;
-        this.placeBooked = !!res.booked;
+        this.placeBooked = res.booked;
       }
     });
   }
 
   async calculateDuration(timeId: number) {
     if (timeId === 1) {
-      // this.arrivalDateTime = this.leavingTime;
       this.arrivalDateTime = new Date(this.arrivalTime).getTime();
       console.log(this.arrivalDateTime);
       this.arrivalTimeSet = true;
     }
     if (timeId === 2) {
-      // this.leavingDateTime = await this.form.value.leavingDateTime;
       this.leavingDateTime = new Date(this.leavingTime).getTime();
       console.log(this.leavingDateTime);
       this.leavingTimeSet = true;
@@ -128,7 +148,6 @@ export class BookingPage implements OnInit {
       const leave = new Date(this.leavingTime).getTime();
       const diff = (leave - arrive) / 3600000;
 
-      // const diff = (this.leavingDateTime - this.arrivalDateTime) / 3600000;
       this.duration = String(Math.ceil(diff));
       this.totalPrice = String(Math.ceil(diff) * this.pricePerHour);
     } else {
@@ -149,8 +168,13 @@ export class BookingPage implements OnInit {
 
   async bookingPlace() {
     try {
+      const loading = await this.loadCtrl.create({
+        message: 'Creating your booking...',
+      });
+      await loading.present();
+
       const email = await this.storage.get('token');
-      const createdAt = new Date().toISOString();
+      // const createdAt = this.today;
 
       const selectedVehicle = this.vehicleList.find((vehicle) => {
         return vehicle.plateNo === this.plateNo;
@@ -159,7 +183,7 @@ export class BookingPage implements OnInit {
       const res = await this.db.collection<Bookings>('bookings').add({
         customerEmail: email,
         customerPlateNo: this.plateNo,
-
+        vehicleId: this.vehicleId,
         placeId: this.placeId,
         placeEmailOwner: this.placeEmailOwner,
         placeName: this.placeName,
@@ -170,13 +194,16 @@ export class BookingPage implements OnInit {
         arrivalDateTime: this.arrivalTime,
         leavingDateTime: this.leavingTime,
         totalPrice: this.totalPrice,
-        createdAt,
+        createdAt: this.today.toISOString(),
         ongoing: true,
       });
 
       await this.placeSvc.updateBookedPlace(this.placeId, this.placeBooked);
+      await this.vehicleSvc.updateVehicleStatus(this.vehicleId, this.vehicleParked);
 
       console.log('>> db response: ', res);
+
+      await loading.dismiss();
 
       const modal = await this.modalCtrl.create({
         component: SuccessComponent,
@@ -192,7 +219,7 @@ export class BookingPage implements OnInit {
         component: FailComponent,
       });
       await modal.present();
-      console.log('ERRORRRRR : ', err);
+      console.error('ERRORRRRR : ', err);
     }
   }
 

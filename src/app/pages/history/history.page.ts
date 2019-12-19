@@ -96,6 +96,7 @@ export class HistoryPage implements OnInit {
         placeEmailOwner,
         placeId,
         customerPlateNo,
+        vehicleId,
         vehicleType,
         vehicleModel,
         duration,
@@ -115,6 +116,7 @@ export class HistoryPage implements OnInit {
         placeEmailOwner,
         placeId,
         customerPlateNo,
+        vehicleId,
         vehicleType,
         vehicleModel,
         duration,
@@ -128,7 +130,6 @@ export class HistoryPage implements OnInit {
 
   onPlaceClick(idx: number) {
     if (this.placeHistory[idx].ongoing) {
-      // TODO : redirect to placeHistoryDetail
       const {
         customerEmail,
         customerPlateNo, vehicleModel, vehicleType,
@@ -136,7 +137,6 @@ export class HistoryPage implements OnInit {
         duration, totalPrice, arrivalDateTime, createdAt, leavingDateTime,
       } = this.placeHistory[idx];
       this.router.navigate([
-      //   '/', <- tinggal uncomment, ganti route detail history vehicle
         '/',
         'tabs',
         'history',
@@ -146,10 +146,6 @@ export class HistoryPage implements OnInit {
         address, placeName,
         duration, totalPrice, arrivalDateTime, createdAt, leavingDateTime,
       ]);
-
-      // this.router.navigate([
-      //   '/', 'detail-place'
-      // ]);
     }
   }
 }

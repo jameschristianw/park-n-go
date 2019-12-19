@@ -53,7 +53,7 @@ export class ManageProfilePage implements OnInit {
     const uId = this.userId;
     const ufirstName = this.form.value.userFirstName;
     const ulastName = this.form.value.userLastName;
-    const uEmail = this.form.value.userEmail;
+    const uEmail = this.userEmail;
     const uphNo = this.form.value.userPhoneNumber;
 
     this.userService.editUserProfile(uId, uEmail, ufirstName, ulastName, uphNo);
@@ -65,10 +65,6 @@ export class ManageProfilePage implements OnInit {
 
   async takePictureFromPhotoAlbum() {
     try {
-      const loading = await this.loadCtrl.create({
-        message: 'Editing your profile...',
-      });
-      await loading.present();
       const options: CameraOptions = {
         quality: 50,
         targetWidth: 600,
@@ -84,10 +80,8 @@ export class ManageProfilePage implements OnInit {
 
       const img = `data:image/jpeg;base64,${result}`;
 
-      const picture = storage().ref(`profilePictures/${this.userEmail}`);
+      const picture = storage().ref(`profilePictures/${this.userEmail}.jpg`);
       picture.putString(img, 'data_url');
-
-      await loading.dismiss();
     } catch (e) {
       console.error(e);
     }

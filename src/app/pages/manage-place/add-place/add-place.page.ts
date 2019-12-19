@@ -18,7 +18,7 @@ export class AddPlacePage implements OnInit {
 
   private locLat!: number;
   private locLng!: number;
-  imageStr!: string;
+  imageStr = 'https://www.freeiconspng.com/uploads/no-image-icon-11.PNG';
 
   locLatLng = false;
 
@@ -51,6 +51,10 @@ export class AddPlacePage implements OnInit {
   }
 
   async addPlaceToDB() {
+    const loading = await this.loadCtrl.create({
+      message: 'Uploading picture...',
+    });
+    await loading.present();
 
     const areaName = this.form.value.areaName;
     const address = this.form.value.address;
@@ -76,15 +80,13 @@ export class AddPlacePage implements OnInit {
 
     console.log(this.places);
 
-    await this.placeService.addPlace(this.places);
+    await this.placeService.addPlace(this.places).finally(async () => {
+      await loading.dismiss();
+    });
   }
 
   async takePictureFromPhotoAlbum() {
     try {
-      const loading = await this.loadCtrl.create({
-        message: 'Uploading picture...',
-      });
-      await loading.present();
       const options: CameraOptions = {
         quality: 50,
         targetWidth: 600,
@@ -97,14 +99,14 @@ export class AddPlacePage implements OnInit {
       };
 
       const result = await this.camera.getPicture(options);
+      console.log(result);
 
       const img = `data:image/jpeg;base64,${result}`;
 
       const picture = storage().ref(`placePictures/${this.form.value.areaName}.jpg`);
-      picture.putString(img, 'data_url').then(
-        this.imageStr = await storage().ref().child('placePictures/' + this.form.value.areaName + '.jpg').getDownloadURL(),
-      );
-      await loading.dismiss();
+      picture.putString(img, 'data_url').then(async () => {
+        this.imageStr = await storage().ref().child('placePictures/' + this.form.value.areaName + '.jpg').getDownloadURL();
+      });
     } catch (e) {
       console.error(e);
     }

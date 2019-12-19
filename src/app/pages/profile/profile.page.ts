@@ -14,7 +14,7 @@ export class ProfilePage implements OnInit {
   user!: UserViewModel;
   name = 'Sample Name';
   email = 'Sample Email';
-  profilePic: any;
+  profilePic = 'https://www.freeiconspng.com/uploads/no-image-icon-11.PNG';
 
   constructor(
     private asyncStorage: AsyncStorageService, private router: Router, private userService: UserService) {
@@ -27,13 +27,18 @@ export class ProfilePage implements OnInit {
       this.user = res[0];
       this.name = res[0].firstName + ' ' + res[0].lastName;
       this.email = res[0].email;
-      this.getProfilePicture();
+      // this.getProfilePicture();
       console.log('LOGGED IN USER FROM ON INIT PROFILE', this.user);
     });
   }
 
+  ionViewDidEnter() {
+    this.getProfilePicture();
+  }
+
   getProfilePicture() {
     storage().ref().child('profilePictures/' + this.email).getDownloadURL().then((url) => {
+      console.log(url)
       this.profilePic = url;
     });
   }

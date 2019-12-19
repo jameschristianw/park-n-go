@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../../../model/user.model';
+import { DAY_NAME, MONTH_NAME } from '../../../model/time.model';
 
 @Component({
   selector: 'app-place',
@@ -38,10 +39,16 @@ export class PlacePage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
     private firestore: AngularFirestore,
+    private loadCtrl: LoadingController,
   ) {
   }
 
   async ngOnInit() {
+    const loading = await this.loadCtrl.create({
+      message: 'Creating your booking...',
+    });
+    await loading.present();
+
     await this.activatedRoute.paramMap.subscribe(paramMap => {
       if (!paramMap.has('custEmail')) {
         this.backToHistory();
@@ -79,7 +86,33 @@ export class PlacePage implements OnInit {
       this.arrivalTime = paramMap.get('arrivalTime') + '';
       this.leavingTime = paramMap.get('leavingTime') + '';
       this.createdAt = paramMap.get('createdAt') + '';
+
+      // Time Format
+      const tempArrTime = new Date(this.arrivalTime);
+      const tempLeaveTime = new Date(this.leavingTime);
+      const tempCreatedAt = new Date(this.createdAt);
+
+      this.arrivalTime = `${
+        DAY_NAME[tempArrTime.getDay()]
+      }, ${tempArrTime.getDate()} ${
+        MONTH_NAME[tempArrTime.getMonth()]
+      } ${tempArrTime.getFullYear()}, ${tempArrTime.getHours()}:${tempArrTime.getMinutes()} WIB`;
+
+      this.leavingTime = `${
+        DAY_NAME[tempLeaveTime.getDay()]
+      }, ${tempLeaveTime.getDate()} ${
+        MONTH_NAME[tempLeaveTime.getMonth()]
+      } ${tempLeaveTime.getFullYear()}, ${tempLeaveTime.getHours()}:${tempLeaveTime.getMinutes()} WIB`;
+
+      this.createdAt = `${
+        DAY_NAME[tempCreatedAt.getDay()]
+      }, ${tempCreatedAt.getDate()} ${
+        MONTH_NAME[tempCreatedAt.getMonth()]
+      } ${tempCreatedAt.getFullYear()}, ${tempCreatedAt.getHours()}:${tempCreatedAt.getMinutes()} WIB`;
+
     });
+
+    await loading.dismiss();
   }
 
   ionViewDidEnter() {

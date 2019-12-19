@@ -89,3 +89,28 @@ ion-title {
   --padding-bottom: var(--ion-padding-14, 14px);
   padding: var(--ion-padding-14, 14px);
 }
+
+.item-container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.caption {
+  font-size: 12px;
+}
+
+.value {
+  font-size: 14px;
+  font-family: 'Montserrat-Regular';
+  color: #565151;
+}
+
+.maps-wrapper {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 202px;
+}
