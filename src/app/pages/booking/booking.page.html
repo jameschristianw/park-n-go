@@ -31,22 +31,36 @@
       <ion-item lines="full" class="list-item">
         <h3 class="key">Arrival</h3>
         <div class="date-wrapper">
-          <!--          <h3 class="date">August 22, 17:00 PM</h3>-->
-          <ion-datetime
-            displayFormat="D MMM YYYY H:mm"
-            min="1997"
-            max="2050"
-            value="2019-01-01T00:00Z"
-            name="arrivalDateTime"
-            [(ngModel)]="arrivalTime"
-            (ionChange)="calculateDuration(1)"
-          >
-          </ion-datetime>
-          <ion-button
-            fill="clear"
-            style="margin-left: 0;"
-            class="change-vehicle"
-          >
+<!--          <h3 class="date">August 22, 17:00 PM</h3>-->
+<!--          <ion-datetime-->
+<!--            displayFormat="D MMM YYYY H:mm"-->
+<!--            min="1997" max="2050"-->
+<!--            value="2019-01-01T00:00Z"-->
+<!--            name="arrivalDateTime" [(ngModel)]="arrivalTime"-->
+<!--            (ionChange)="calculateDuration(1)"-->
+<!--          >-->
+<!--          </ion-datetime>-->
+<!--            <ion-datetime-->
+<!--                    display-format="DD MMM YYYY HH:mm"-->
+<!--                    picker-format="YYYY MMM DD HH mm"-->
+<!--                    [min]="availableFrom.toISOString()"-->
+<!--                    [max]="availableTo.toISOString()"-->
+<!--                    [ngModel]="arrivalTime"-->
+<!--                    name="arrivalDateTime"-->
+<!--                    required-->
+<!--                    #startDateCtrl="ngModel"-->
+<!--            ></ion-datetime>-->
+
+            <ion-datetime
+                    display-format="D MMM YYYY HH:mm"
+                    picker-format="YYYY MMM DD HH:mm"
+                    [min]="today.toISOString()"
+                    [(ngModel)]="arrivalTime"
+                    name="arrivalDateTime"
+                    required
+                    (ionChange)="calculateDuration(1)"
+            ></ion-datetime>
+            <ion-button fill="clear" style="margin-left: 0;" class="change-vehicle">
             <ion-icon name="calendar"></ion-icon>
           </ion-button>
         </div>
@@ -54,21 +68,36 @@
       <ion-item lines="full" class="list-item">
         <h3 class="key">Leaving</h3>
         <div class="date-wrapper">
-          <ion-datetime
-            displayFormat="D MMM YYYY H:mm"
-            min="1997"
-            max="2050"
-            value="2019-01-01T00:00Z"
-            name="leavingDateTime"
-            [(ngModel)]="leavingTime"
-            (ionChange)="calculateDuration(2)"
-          >
-          </ion-datetime>
-          <ion-button
-            style="margin-left: 0;"
-            fill="clear"
-            class="change-vehicle"
-          >
+<!--          <ion-datetime-->
+<!--            displayFormat="D MMM YYYY H:mm"-->
+<!--            min="1997" max="2050"-->
+<!--            value="2019-01-01T00:00Z"-->
+<!--            name="leavingDateTime" [(ngModel)]="leavingTime"-->
+<!--            (ionChange)="calculateDuration(2)">-->
+<!--          </ion-datetime>-->
+<!--            <ion-datetime-->
+<!--                    display-format="DD MMM YYYY HH:mm"-->
+<!--                    picker-format="YYYY MMM DD HH mm"-->
+<!--                    [min]="startDateCtrl.value"-->
+<!--                    [max]="availableTo.toISOString()"-->
+<!--                    [ngModel]="leavingTime"-->
+<!--                    name="leavingDateTime"-->
+<!--                    required-->
+<!--                    #startDateCtrl="ngModel"-->
+<!--            ></ion-datetime>-->
+
+
+            <ion-datetime
+                    display-format="D MMM YYYY HH:mm"
+                    picker-format="YYYY MMM DD HH mm"
+                    [min]="today.toISOString()"
+                    [max]="availableTo.toISOString()"
+                    [(ngModel)]="leavingTime"
+                    name="leavingDateTime"
+                    required
+                    (ionChange)="calculateDuration(2)"
+            ></ion-datetime>
+          <ion-button style="margin-left: 0;" fill="clear" class="change-vehicle">
             <ion-icon name="calendar"></ion-icon>
           </ion-button>
         </div>

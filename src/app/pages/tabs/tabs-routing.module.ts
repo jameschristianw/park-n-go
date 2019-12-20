@@ -21,8 +21,13 @@ const routes: Routes = [
           },
           {
             path:
-              'vehicle/:bookId/:ownerId/:placeId/:vehiclePlateNo/:vehicleType/:vehicleModel/:duration/:price/:arrivalTime/:leavingTime/:createdAt',
+              'vehicle/:bookId/:ownerId/:placeId/:vehiclePlateNo/:vehicleId/:vehicleType/:vehicleModel/:duration/:price/:arrivalTime/:leavingTime/:createdAt',
             loadChildren: '../history/vehicle/vehicle.module#VehiclePageModule',
+          },
+          {
+            path:
+              'place/:custEmail/:vehiclePlateNo/:vehicleModel/:vehicleType/:address/:placeName/:duration/:price/:arrivalTime/:createdAt/:leavingTime',
+            loadChildren: '../history/place/place.module#PlacePageModule',
           },
         ],
       },
@@ -39,4 +44,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class TabsRoutingModule {}
+export class TabsRoutingModule {
+}

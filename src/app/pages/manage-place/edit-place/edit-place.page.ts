@@ -37,6 +37,10 @@ export class EditPlacePage implements OnInit {
   locLng!: number;
   locLatLng = false;
   booked!: boolean;
+  
+  pricePerHour: any;
+  address: any;
+  areaName: any;
 
   constructor(
     private navCtrl: NavController,
@@ -141,10 +145,6 @@ export class EditPlacePage implements OnInit {
 
   async takePictureFromPhotoAlbum() {
     try {
-      const loading = await this.loadCtrl.create({
-        message: 'Uploading picture...',
-      });
-      await loading.present();
       const options: CameraOptions = {
         quality: 50,
         targetWidth: 600,
@@ -161,10 +161,9 @@ export class EditPlacePage implements OnInit {
       const img = `data:image/jpeg;base64,${result}`;
 
       const picture = storage().ref(`placePictures/${this.form.value.areaName}.jpg`);
-      picture.putString(img, 'data_url').then(
-        this.imageStr = await storage().ref().child('placePictures/' + this.form.value.areaName + '.jpg').getDownloadURL(),
-      );
-      await loading.dismiss();
+      picture.putString(img, 'data_url').then( async () => {
+        this.imageStr = await storage().ref().child('placePictures/' + this.form.value.areaName + '.jpg').getDownloadURL();
+      });
     } catch (e) {
       console.error(e);
     }
@@ -172,7 +171,7 @@ export class EditPlacePage implements OnInit {
 
   async deletePlaceFromDB() {
     const loading = await this.loadCtrl.create({
-      message: 'Editing your place...',
+      message: 'Deleting your place...',
     });
     await loading.present();
 

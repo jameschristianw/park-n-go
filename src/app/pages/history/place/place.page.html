@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button
+              slot="start"
+              defaultHref="/tabs/history"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ placeName }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="full" style="margin-bottom: 10px;">
+    <ion-item lines="full">
+      <div class="item-container">
+        <ion-label class="caption">Created At</ion-label>
+        <ion-label class="value">{{ createdAt }}</ion-label>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="item-container">
+        <ion-label class="caption">Vehicle Model</ion-label>
+        <ion-label class="value">{{ vehicleModel }}</ion-label>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="item-container">
+        <ion-label class="caption">Vehicle Type</ion-label>
+        <ion-label class="value">{{ vehicleType }}</ion-label>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="item-container">
+        <ion-label class="caption">Place Name</ion-label>
+        <ion-label class="value">{{ placeName }}</ion-label>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="item-container">
+        <ion-label class="caption">Address</ion-label>
+        <ion-label class="value">{{ placeAddress }}</ion-label>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="item-container">
+        <ion-label class="caption">Customer Name</ion-label>
+        <ion-label class="value">{{customerFullName}}</ion-label>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="item-container">
+        <ion-label class="caption">Phone No.</ion-label>
+        <ion-label class="value">{{customerPhoneNo}}</ion-label>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="item-container">
+        <ion-label class="caption">Arrival Time</ion-label>
+        <ion-label class="value">{{arrivalTime}}</ion-label>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="item-container">
+        <ion-label class="caption">Leaving Time</ion-label>
+        <ion-label class="value">{{leavingTime}}</ion-label>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="item-container">
+        <ion-label class="caption">Duration </ion-label>
+        <ion-label class="value">
+          {{parkingDuration}} <b *ngIf="parkingDuration ==1">Hour</b>
+          <b *ngIf="parkingDuration !=1">Hours</b>
+        </ion-label>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="item-container">
+        <ion-label class="caption">Price</ion-label>
+        <ion-label class="value">{{totalPrice}}</ion-label>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

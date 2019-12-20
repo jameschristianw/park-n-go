@@ -133,7 +133,7 @@ export class HomePage implements OnInit {
 
     this.map = GoogleMaps.create('map_canvas', mapOptions);
 
-    const currMarker: Marker = this.map.addMarkerSync({
+    const currMarker: Marker = await this.map.addMarkerSync({
       title: 'Current Location',
       icon: 'blue',
       animation: 'DROP',
@@ -141,6 +141,10 @@ export class HomePage implements OnInit {
         lat: locLat,
         lng: locLong,
       },
+    });
+
+    this.map.on(GoogleMapsEvent.MAP_CLICK).subscribe( () => {
+      this.ngZone.run(() => (this.cardVisible = false));
     });
 
     currMarker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {

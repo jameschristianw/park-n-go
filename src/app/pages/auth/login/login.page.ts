@@ -44,9 +44,19 @@ export class LoginPage implements OnInit {
           console.log(error);
         }
       },
-      (errorResp) => {
-        this.presentFailedToast();
-        console.log('error', errorResp);
+      async (errorResp) => {
+        await loading.dismiss();
+        const errorMessage = errorResp.error.error.message;
+        if (errorMessage === 'INVALID_PASSWORD') {
+          this.presentFailedToast();
+        } else if (errorMessage === 'INVALID_EMAIL' || errorMessage === 'EMAIL_NOT_FOUND') {
+          this.presentInvalidEmailToast();
+        } else if (errorMessage === 'MISSING_PASSWORD') {
+          this.presentMissingPasswordToast();
+        } else {
+          this.presentCheckInternetToast();
+        }
+        console.log('error', errorResp.error.error.message);
       },
     );
   }
@@ -62,6 +72,30 @@ export class LoginPage implements OnInit {
   async presentFailedToast() {
     const toast = await this.toastCtrl.create({
       message: `Incorrect email/password. Please try again.`,
+      duration: 3000,
+    });
+    await toast.present();
+  }
+
+  async presentCheckInternetToast() {
+    const toast = await this.toastCtrl.create({
+      message: `Please check your internet connection`,
+      duration: 3000,
+    });
+    await toast.present();
+  }
+
+  async presentInvalidEmailToast() {
+    const toast = await this.toastCtrl.create({
+      message: `Please check your email!`,
+      duration: 3000,
+    });
+    await toast.present();
+  }
+
+  async presentMissingPasswordToast() {
+    const toast = await this.toastCtrl.create({
+      message: `Password is required`,
       duration: 3000,
     });
     await toast.present();

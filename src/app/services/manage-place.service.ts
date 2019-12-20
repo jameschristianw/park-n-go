@@ -76,11 +76,13 @@ export class ManagePlaceService {
 
   updateBookedPlace(id: string, booked: boolean) {
     if (booked) {
-      return this.placesCollection.doc(id).update({
+      console.log('here');
+      return this.db.doc('places/' + id).update({
         booked: false,
       });
     } else {
-      return this.placesCollection.doc(id).update({
+      console.log('here2');
+      return this.db.doc('places/' + id).update({
         booked: true,
       });
     }

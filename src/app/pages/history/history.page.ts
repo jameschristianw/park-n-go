@@ -64,6 +64,8 @@ export class HistoryPage implements OnInit {
       console.log('ini owner', res[0].placeEmailOwner);
 
       this.placeHistory = res;
+
+      console.log(this.placeHistory);
     });
   }
 
@@ -94,6 +96,7 @@ export class HistoryPage implements OnInit {
         placeEmailOwner,
         placeId,
         customerPlateNo,
+        vehicleId,
         vehicleType,
         vehicleModel,
         duration,
@@ -113,6 +116,7 @@ export class HistoryPage implements OnInit {
         placeEmailOwner,
         placeId,
         customerPlateNo,
+        vehicleId,
         vehicleType,
         vehicleModel,
         duration,
@@ -126,33 +130,22 @@ export class HistoryPage implements OnInit {
 
   onPlaceClick(idx: number) {
     if (this.placeHistory[idx].ongoing) {
-      // TODO : redirect to placeHistoryDetail
-      // let {
-      //   customerEmail,
-      //   customerPlateNo,
-      //   address,
-      //   placeName,
-      //   duration,
-      //   totalPrice,
-      //   arrivalDateTime,
-      //   createdAt,
-      //   leavingDateTime,
-      // } = this.placeHistory[idx];
-      //   this.router.navigate([
-      //   '/', <- tinggal uncomment, ganti route detail history vehicle
-      //     '/',
-      //     'history',
-      //     'place',
-      //     customerEmail,
-      //     customerPlateNo,
-      //     address,
-      //     placeName,
-      //     duration,
-      //     totalPrice,
-      //     arrivalDateTime,
-      //     createdAt,
-      //     leavingDateTime,
-      //   ]);
+      const {
+        customerEmail,
+        customerPlateNo, vehicleModel, vehicleType,
+        address, placeName,
+        duration, totalPrice, arrivalDateTime, createdAt, leavingDateTime,
+      } = this.placeHistory[idx];
+      this.router.navigate([
+        '/',
+        'tabs',
+        'history',
+        'place',
+        customerEmail,
+        customerPlateNo, vehicleModel, vehicleType,
+        address, placeName,
+        duration, totalPrice, arrivalDateTime, createdAt, leavingDateTime,
+      ]);
     }
   }
 }

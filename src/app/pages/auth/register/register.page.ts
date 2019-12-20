@@ -62,11 +62,13 @@ export class RegisterPage implements OnInit {
           console.log(error);
         }
       },
-      (errorResp) => {
+      async (errorResp) => {
         if (errorResp.error.error.message === 'EMAIL_EXISTS') {
+          await loading.dismiss();
           this.presentEmailExistToast();
         } else {
-          console.log('error', errorResp);
+          await loading.dismiss();
+          console.log('error', errorResp.error.error.message);
         }
       },
     );

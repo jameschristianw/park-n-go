@@ -66,7 +66,7 @@ export class ManageVehicleService {
       vehicleModel: model,
       email: emailOwner,
       plateNo: plate,
-      parked: false
+      parked: false,
     });
   }
 
@@ -82,5 +82,12 @@ export class ManageVehicleService {
 
   deleteVehicle(id: string, email: string) {
     return this.db.doc('vehicles/' + id).delete();
+  }
+
+  updateVehicleStatus(id: string, park: boolean) {
+    console.log('here3');
+    return this.db.doc<Vehicle>('vehicles/' + id).update({
+      parked: !park,
+    }).then(r => r);
   }
 }

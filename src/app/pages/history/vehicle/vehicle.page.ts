@@ -15,6 +15,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { UserViewModel, User } from 'src/app/model/user.model';
+import { ManageVehicleService } from '../../../services/manage-vehicle.service';
+import { ManagePlaceService } from '../../../services/manage-place.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-vehicle',
@@ -27,16 +30,22 @@ export class VehiclePage implements OnInit {
     private db: AngularFirestore,
     private launchNavigator: LaunchNavigator,
     private router: Router,
-  ) {}
+    private vehicleSvc: ManageVehicleService,
+    private placeSvc: ManagePlaceService,
+    private loadCtrl: LoadingController,
+  ) {
+  }
 
   token!: string;
   ownerId!: string;
   placeId!: string;
   plateNo!: string;
+  vehicleId!: string;
   vehicleType!: string;
   vehicleModel!: string;
-  duration!: number;
-  price!: number;
+
+  duration!: any;
+  price!: any;
   arrivalTime!: Date;
   leavingTime!: Date;
   createdAt!: Date;
@@ -44,9 +53,12 @@ export class VehiclePage implements OnInit {
   arrivalTimeString!: string;
   leavingTimeString!: string;
   createdAtString!: string;
+
   placeDetail: PlaceViewModel = placeInitialValue;
   ownerDetail: UserViewModel = userViewModelinitialValue;
-  ngOnInit() {}
+
+  ngOnInit() {
+  }
 
   async ionViewDidEnter() {
     this.activatedRoute.paramMap.subscribe((paramMap) => {
@@ -60,6 +72,7 @@ export class VehiclePage implements OnInit {
         this.ownerId = paramMap.get('ownerId') || '';
         this.placeId = paramMap.get('placeId') || '';
         this.plateNo = paramMap.get('vehiclePlateNo') || '';
+        this.vehicleId = paramMap.get('vehicleId') || '';
         this.vehicleType = paramMap.get('vehicleType') || '';
         this.vehicleModel = paramMap.get('vehicleModel') || '';
         this.duration = Number(paramMap.get('duration')) || 0;
@@ -147,6 +160,10 @@ export class VehiclePage implements OnInit {
   }
 
   async finishBooking() {
+    const loading = await this.loadCtrl.create({
+      message: 'Finishing your parking...'
+    });
+    await loading.present();
     try {
       this.db
         .collection<Bookings>('bookings')
@@ -154,7 +171,12 @@ export class VehiclePage implements OnInit {
         .update({
           ongoing: false,
         });
-      this.router.navigateByUrl('/tabs/history');
+
+      console.log(this.placeId, this.vehicleId);
+      await this.placeSvc.updateBookedPlace(this.placeId, true);
+      await this.vehicleSvc.updateVehicleStatus(this.vehicleId, true);
+      await this.router.navigateByUrl('/tabs/history');
+      await loading.dismiss();
     } catch (e) {
       console.log('error while finish booking', e);
     }
